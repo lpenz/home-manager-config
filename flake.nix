@@ -47,9 +47,38 @@
               pkgs.ripgrep
               pkgs.topgrade
               pkgs.zsh
+
+              # fish:
+              pkgs.fishPlugins.fzf-fish
+              pkgs.fishPlugins.sponge
+              pkgs.fishPlugins.tide
             ];
 
             programs.emacs.enable = true;
+
+            # Fish
+            programs.fish = {
+              enable = true;
+              interactiveShellInit = ''
+                # Commands to run in interactive sessions can go here
+                set fish_greeting
+                set -gx EDITOR vim
+                set -gx VISUAL vim
+                fzf_configure_bindings
+                direnv hook fish | source
+                function push-line
+                    commandline -f kill-whole-line
+                    function restore_line --on-event fish_prompt
+                        commandline -f yank
+                        functions -e restore_line
+                    end
+                end
+                bind \eq push-line
+                bind \ed kill-bigword
+                bind \e\x7f backward-kill-bigword
+                bind \eb backward-bigword
+              '';
+            };
 
             # Install executables in ~/bin
             home.file = {
@@ -84,6 +113,7 @@
               "bin/autoflake".source = "${pkgs.autoflake}/bin/autoflake";
               "bin/direnv".source = "${pkgs.direnv}/bin/direnv";
               "bin/fd".source = "${pkgs.fd}/bin/fd";
+              "bin/fish".source = "${pkgs.fish}/bin/fish";
               "bin/fzf".source = "${pkgs.fzf}/bin/fzf";
               "bin/htop".source = "${pkgs.htop}/bin/htop";
               "bin/nnn" = {
@@ -101,6 +131,7 @@
               "bin/emacs".source = "${pkgs.emacs}/bin/emacs";
               "bin/emacsclient".source = "${pkgs.emacs}/bin/emacsclient";
             };
+
           }
         ];
       };
