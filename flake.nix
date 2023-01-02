@@ -25,11 +25,12 @@
             home.stateVersion = "22.11";
             home.username = "${user}";
             home.homeDirectory = "/home/${user}";
+
             home.packages = [
               execpermfix.packages.${system}.default
               tuzue.packages.${system}.default
 
-              pkgs.bat
+              pkgs.direnv
               pkgs.fd
               pkgs.fzf
               pkgs.glibcLocales
@@ -37,6 +38,7 @@
               pkgs.topgrade
               pkgs.zsh
             ];
+
             programs.emacs.enable = true;
           }
         ];
