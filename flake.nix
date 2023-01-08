@@ -9,9 +9,10 @@
     };
     execpermfix.url = "github:lpenz/execpermfix";
     tuzue.url = "github:lpenz/tuzue";
+    ogle.url = "github:lpenz/ogle";
   };
 
-  outputs = { nixpkgs, home-manager, execpermfix, tuzue, ... }:
+  outputs = { nixpkgs, home-manager, execpermfix, tuzue, ogle, ... }:
     let
       system = "x86_64-linux";
       user = "lpenz";
@@ -29,6 +30,7 @@
             home.packages = [
               execpermfix.packages.${system}.default
               tuzue.packages.${system}.default
+              ogle.packages.${system}.default
 
               pkgs.direnv
               pkgs.fd
