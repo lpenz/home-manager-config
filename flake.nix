@@ -36,6 +36,7 @@
               pkgs.fd
               pkgs.fzf
               pkgs.glibcLocales
+              pkgs.nnn
               pkgs.ripgrep
               pkgs.topgrade
               pkgs.zsh
