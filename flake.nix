@@ -43,6 +43,30 @@
             ];
 
             programs.emacs.enable = true;
+
+            # Install executables in ~/bin
+            home.file = {
+              # nix's own
+              "bin/nix".source = "${pkgs.nix}/bin/nix";
+              "bin/home-manager".source = "${pkgs.home-manager}/bin/home-manager";
+              # mine
+              "bin/execpermfix".source = "${execpermfix}/bin/execpermfix";
+              "bin/tuzue-chdir".source = "${tuzue}/bin/tuzue-chdir";
+              "bin/tuzue-json".source = "${tuzue}/bin/tuzue-json";
+              "bin/tuzue-manmenu".source = "${tuzue}/bin/tuzue-manmenu";
+              "bin/ogle".source = "${ogle}/bin/ogle";
+              # regular packages
+              "bin/direnv".source = "${pkgs.direnv}/bin/direnv";
+              "bin/fd".source = "${pkgs.fd}/bin/fd";
+              "bin/fzf".source = "${pkgs.fzf}/bin/fzf";
+              # "bin/nnn".source = "${pkgs.nnn}/bin/nnn"; # wrapped
+              "bin/rg".source = "${pkgs.ripgrep}/bin/rg";
+              "bin/topgrade".source = "${pkgs.topgrade}/bin/topgrade";
+              "bin/zsh".source = "${pkgs.zsh}/bin/zsh";
+              # emacs
+              "bin/emacs".source = "${pkgs.emacs}/bin/emacs";
+              "bin/emacsclient".source = "${pkgs.emacs}/bin/emacsclient";
+            };
           }
         ];
       };
