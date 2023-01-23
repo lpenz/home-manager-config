@@ -47,8 +47,19 @@
             # Install executables in ~/bin
             home.file = {
               # nix's own
-              "bin/nix".source = "${pkgs.nix}/bin/nix";
               "bin/home-manager".source = "${pkgs.home-manager}/bin/home-manager";
+              "bin/nix".source = "${pkgs.nix}/bin/nix";
+              "bin/nix-build".source = "${pkgs.nix}/bin/nix-build";
+              "bin/nix-channel".source = "${pkgs.nix}/bin/nix-channel";
+              "bin/nix-collect-garbage".source = "${pkgs.nix}/bin/nix-collect-garbage";
+              "bin/nix-copy-closure".source = "${pkgs.nix}/bin/nix-copy-closure";
+              "bin/nix-daemon".source = "${pkgs.nix}/bin/nix-daemon";
+              "bin/nix-env".source = "${pkgs.nix}/bin/nix-env";
+              "bin/nix-hash".source = "${pkgs.nix}/bin/nix-hash";
+              "bin/nix-instantiate".source = "${pkgs.nix}/bin/nix-instantiate";
+              "bin/nix-prefetch-url".source = "${pkgs.nix}/bin/nix-prefetch-url";
+              "bin/nix-shell".source = "${pkgs.nix}/bin/nix-shell";
+              "bin/nix-store".source = "${pkgs.nix}/bin/nix-store";
               # mine
               "bin/execpermfix".source = "${execpermfix}/bin/execpermfix";
               "bin/tuzue-chdir".source = "${tuzue}/bin/tuzue-chdir";
