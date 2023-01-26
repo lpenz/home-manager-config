@@ -17,6 +17,11 @@
       system = "x86_64-linux";
       user = "lpenz";
       pkgs = nixpkgs.legacyPackages.${system};
+      mypkgs = {
+        execpermfix = execpermfix.packages.${system}.default;
+        ogle = ogle.packages.${system}.default;
+        tuzue = tuzue.packages.${system}.default;
+      };
     in {
       homeConfigurations.lpenz = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
@@ -28,9 +33,9 @@
             home.homeDirectory = "/home/${user}";
 
             home.packages = [
-              execpermfix.packages.${system}.default
-              tuzue.packages.${system}.default
-              ogle.packages.${system}.default
+              mypkgs.execpermfix
+              mypkgs.tuzue
+              mypkgs.ogle
 
               pkgs.direnv
               pkgs.fd
@@ -61,11 +66,11 @@
               "bin/nix-shell".source = "${pkgs.nix}/bin/nix-shell";
               "bin/nix-store".source = "${pkgs.nix}/bin/nix-store";
               # mine
-              "bin/execpermfix".source = "${execpermfix}/bin/execpermfix";
-              "bin/tuzue-chdir".source = "${tuzue}/bin/tuzue-chdir";
-              "bin/tuzue-json".source = "${tuzue}/bin/tuzue-json";
-              "bin/tuzue-manmenu".source = "${tuzue}/bin/tuzue-manmenu";
-              "bin/ogle".source = "${ogle}/bin/ogle";
+              "bin/execpermfix".source = "${mypkgs.execpermfix}/bin/execpermfix";
+              "bin/tuzue-chdir".source = "${mypkgs.tuzue}/bin/tuzue-chdir";
+              "bin/tuzue-json".source = "${mypkgs.tuzue}/bin/tuzue-json";
+              "bin/tuzue-manmenu".source = "${mypkgs.tuzue}/bin/tuzue-manmenu";
+              "bin/ogle".source = "${mypkgs.ogle}/bin/ogle";
               # regular packages
               "bin/direnv".source = "${pkgs.direnv}/bin/direnv";
               "bin/fd".source = "${pkgs.fd}/bin/fd";
