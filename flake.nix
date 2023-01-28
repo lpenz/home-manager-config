@@ -53,7 +53,14 @@
             home.file = {
               # nix's own
               "bin/home-manager".source = "${pkgs.home-manager}/bin/home-manager";
-              "bin/nix".source = "${pkgs.nix}/bin/nix";
+              "bin/nix" = {
+                executable = true;
+                text = ''
+                         #!/bin/bash
+                         PATH="$HOME/.nix-profile/bin:$PATH"
+                         exec ${pkgs.nix}/bin/nix "$@"
+                       '';
+              };
               "bin/nix-build".source = "${pkgs.nix}/bin/nix-build";
               "bin/nix-channel".source = "${pkgs.nix}/bin/nix-channel";
               "bin/nix-collect-garbage".source = "${pkgs.nix}/bin/nix-collect-garbage";
@@ -75,7 +82,14 @@
               "bin/direnv".source = "${pkgs.direnv}/bin/direnv";
               "bin/fd".source = "${pkgs.fd}/bin/fd";
               "bin/fzf".source = "${pkgs.fzf}/bin/fzf";
-              # "bin/nnn".source = "${pkgs.nnn}/bin/nnn"; # wrapped
+              "bin/nnn" = {
+                executable = true;
+                text = ''
+                         #!/bin/bash
+                         export PAGER=less
+                         exec "${pkgs.nnn}/bin/nnn" "$@"
+                       '';
+              };
               "bin/rg".source = "${pkgs.ripgrep}/bin/rg";
               "bin/topgrade".source = "${pkgs.topgrade}/bin/topgrade";
               "bin/zsh".source = "${pkgs.zsh}/bin/zsh";
