@@ -37,6 +37,7 @@
               mypkgs.tuzue
               mypkgs.ogle
 
+              pkgs.autoflake
               pkgs.direnv
               pkgs.fd
               pkgs.fzf
@@ -79,6 +80,7 @@
               "bin/tuzue-manmenu".source = "${mypkgs.tuzue}/bin/tuzue-manmenu";
               "bin/ogle".source = "${mypkgs.ogle}/bin/ogle";
               # regular packages
+              "bin/autoflake".source = "${pkgs.autoflake}/bin/autoflake";
               "bin/direnv".source = "${pkgs.direnv}/bin/direnv";
               "bin/fd".source = "${pkgs.fd}/bin/fd";
               "bin/fzf".source = "${pkgs.fzf}/bin/fzf";
