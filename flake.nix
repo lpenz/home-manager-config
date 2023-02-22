@@ -38,6 +38,7 @@
               mypkgs.ogle
 
               pkgs.autoflake
+              pkgs.bat
               pkgs.direnv
               pkgs.fd
               pkgs.fzf
@@ -111,6 +112,7 @@
               "bin/ogle".source = "${mypkgs.ogle}/bin/ogle";
               # regular packages
               "bin/autoflake".source = "${pkgs.autoflake}/bin/autoflake";
+              "bin/bat".source = "${pkgs.bat}/bin/bat";
               "bin/direnv".source = "${pkgs.direnv}/bin/direnv";
               "bin/fd".source = "${pkgs.fd}/bin/fd";
               "bin/fish".source = "${pkgs.fish}/bin/fish";
