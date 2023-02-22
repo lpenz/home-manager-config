@@ -42,6 +42,7 @@
               pkgs.fd
               pkgs.fzf
               pkgs.glibcLocales
+              pkgs.htop
               pkgs.nnn
               pkgs.ripgrep
               pkgs.topgrade
@@ -84,6 +85,7 @@
               "bin/direnv".source = "${pkgs.direnv}/bin/direnv";
               "bin/fd".source = "${pkgs.fd}/bin/fd";
               "bin/fzf".source = "${pkgs.fzf}/bin/fzf";
+              "bin/htop".source = "${pkgs.htop}/bin/htop";
               "bin/nnn" = {
                 executable = true;
                 text = ''
