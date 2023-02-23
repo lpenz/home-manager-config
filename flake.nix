@@ -48,11 +48,6 @@
               pkgs.ripgrep
               pkgs.topgrade
               pkgs.zsh
-
-              # fish:
-              pkgs.fishPlugins.fzf-fish
-              pkgs.fishPlugins.sponge
-              pkgs.fishPlugins.tide
             ];
 
             programs.emacs.enable = true;
@@ -65,7 +60,6 @@
                 set fish_greeting
                 set -gx EDITOR vim
                 set -gx VISUAL vim
-                fzf_configure_bindings
                 direnv hook fish | source
                 function push-line
                     commandline -f kill-whole-line
@@ -79,6 +73,11 @@
                 bind \e\x7f backward-kill-bigword
                 bind \eb backward-bigword
               '';
+              plugins = [
+                { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish.src; }
+                { name = "sponge"; src = pkgs.fishPlugins.sponge.src; }
+                { name = "tide"; src = pkgs.fishPlugins.tide.src; }
+              ];
             };
 
             # Install executables in ~/bin
