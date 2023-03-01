@@ -1,0 +1,14 @@
+#!/bin/bash
+
+summary="$1"
+shift
+
+msg="\e]777;notify;${summary};$*\a"
+
+if [ "$TERM" = "rxvt-256color" ]; then
+    # Print OSC directly:
+    printf "$msg"
+elif [ "$TERM" = "screen-256color" ]; then
+    # Escape OSC through tmux to reach urxvt:
+    printf "\ePtmux;\e${msg}\e\\"
+fi

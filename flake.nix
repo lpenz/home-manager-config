@@ -68,6 +68,9 @@
                 set -gx PYTHONSTARTUP $HOME/.pystartup
                 set -gx XAUTHORITY $HOME/.Xauthority
                 set -gx RUST_SRC_PATH /usr/src/rust/src
+                set -U __done_min_cmd_duration 3000
+                set -U __done_notification_command "urxvt-notify \$title \$message"
+                set -U __done_allow_nongraphical 1
                 fzf_configure_bindings --directory=\ct
                 fzf_configure_bindings --variables=
                 direnv hook fish | source
@@ -87,6 +90,7 @@
                 { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish.src; }
                 { name = "sponge"; src = pkgs.fishPlugins.sponge.src; }
                 { name = "tide"; src = pkgs.fishPlugins.tide.src; }
+                { name = "done"; src = pkgs.fishPlugins.done.src; }
               ];
             };
 
@@ -141,6 +145,11 @@
               # emacs
               "bin/emacs".source = "${pkgs.emacs}/bin/emacs";
               "bin/emacsclient".source = "${pkgs.emacs}/bin/emacsclient";
+              # import local scripts/dotfiles
+              "bin/urxvt-notify" = {
+                executable = true;
+                source = ./urxvt-notify;
+              };
             };
 
           }
