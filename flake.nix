@@ -68,6 +68,8 @@
                 set -gx PYTHONSTARTUP $HOME/.pystartup
                 set -gx XAUTHORITY $HOME/.Xauthority
                 set -gx RUST_SRC_PATH /usr/src/rust/src
+                fzf_configure_bindings --directory=\ct
+                fzf_configure_bindings --variables=
                 direnv hook fish | source
                 function push-line
                     commandline -f kill-whole-line
