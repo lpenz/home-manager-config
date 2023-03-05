@@ -16,7 +16,7 @@
 
   outputs = { nixpkgs, home-manager, cachix, disk-img-tool, execpermfix, ogle, stdecor, ... }:
     let
-      system = "x86_64-linux";
+      system = "aarch64-linux";
       user = "lpenz";
       urxvtnotify = ./scripts/urxvt-notify;
       pkgs = nixpkgs.legacyPackages.${system};
