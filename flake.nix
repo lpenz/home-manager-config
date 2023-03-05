@@ -16,7 +16,7 @@
 
   outputs = { self, nixpkgs, home-manager, cachix, nixvim, ... }:
     let
-      system = "x86_64-linux";
+      system = "aarch64-linux";
       user = "lpenz";
       urxvtnotify = ./scripts/urxvt-notify;
       pkgs = import nixpkgs {
