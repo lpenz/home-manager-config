@@ -40,6 +40,7 @@
 
               pkgs.autoflake
               pkgs.bat
+              pkgs.black
               pkgs.direnv
               pkgs.fd
               pkgs.fzf
@@ -47,6 +48,7 @@
               pkgs.htop
               pkgs.nnn
               pkgs.ripgrep
+              pkgs.shfmt
               pkgs.topgrade
               pkgs.zsh
             ];
@@ -95,6 +97,7 @@
               # regular packages
               "bin/autoflake".source = "${pkgs.autoflake}/bin/autoflake";
               "bin/bat".source = "${pkgs.bat}/bin/bat";
+              "bin/black".source = "${pkgs.black}/bin/black";
               "bin/direnv".source = "${pkgs.direnv}/bin/direnv";
               "bin/fd".source = "${pkgs.fd}/bin/fd";
               "bin/fish".source = "${pkgs.fish}/bin/fish";
@@ -109,6 +112,7 @@
                        '';
               };
               "bin/rg".source = "${pkgs.ripgrep}/bin/rg";
+              "bin/shfmt".source = "${pkgs.shfmt}/bin/shfmt";
               "bin/topgrade".source = "${pkgs.topgrade}/bin/topgrade";
               "bin/zsh".source = "${pkgs.zsh}/bin/zsh";
               # emacs
