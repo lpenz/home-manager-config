@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -x -e
+
+df -h
+sudo aptitude clean
+cargo cache -e
+nix-collect-garbage -d
+df -h
+

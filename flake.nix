@@ -87,6 +87,11 @@
               "bin/tuzue-json".source = "${mypkgs.tuzue}/bin/tuzue-json";
               "bin/tuzue-manmenu".source = "${mypkgs.tuzue}/bin/tuzue-manmenu";
               "bin/ogle".source = "${mypkgs.ogle}/bin/ogle";
+              # local scripts
+              "bin/cleantop" = {
+                executable = true;
+                source = ./cleantop;
+              };
               # regular packages
               "bin/autoflake".source = "${pkgs.autoflake}/bin/autoflake";
               "bin/bat".source = "${pkgs.bat}/bin/bat";
