@@ -4,6 +4,7 @@
   interactiveShellInit = ''
     # Commands to run in interactive sessions can go here
     set fish_greeting
+    fish_add_path "$HOME/bin"
     set -Ux LOCALE_ARCHIVE_2_27 $HOME/.nix-profile/lib/locale/locale-archive
     set -gx EDITOR vim
     set -gx VISUAL vim
@@ -31,6 +32,7 @@
     bind \ed kill-bigword
     bind \e\x7f backward-kill-bigword
     bind \eb backward-bigword
+    bind \cx\ce edit_command_buffer
     '';
   plugins = [
     { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish.src; }
