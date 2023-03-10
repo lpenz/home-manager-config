@@ -90,10 +90,8 @@
               "bin/tuzue-manmenu".source = "${mypkgs.tuzue}/bin/tuzue-manmenu";
               "bin/ogle".source = "${mypkgs.ogle}/bin/ogle";
               # local scripts
-              "bin/cleantop" = {
-                executable = true;
-                source = ./cleantop;
-              };
+              "bin/cleantop" = { executable = true; source = ./cleantop; };
+              "bin/tmux-pstree" = { executable = true; source = ./tmux-pstree; };
               # regular packages
               "bin/autoflake".source = "${pkgs.autoflake}/bin/autoflake";
               "bin/bat".source = "${pkgs.bat}/bin/bat";

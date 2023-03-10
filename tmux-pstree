@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -z "$TMUX" ]; then
+    echo tmux session not detected >&2
+    exit 1
+fi
+
+pid=$(echo "$TMUX" | cut -d, -f2)
+
+set -e -x
+
+pstree -asp "$pid"
