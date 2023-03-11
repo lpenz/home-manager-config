@@ -14,5 +14,6 @@ jobs:
       - uses: cachix/install-nix-action@v18
         with:
           nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: 'experimental-features = nix-command flakes'
       - run: nix flake check
-      - run: nix flake info
+      - run: nix run '.#homeConfigurations.lpenz.activationPackage'
