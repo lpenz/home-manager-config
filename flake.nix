@@ -16,7 +16,7 @@
     let
       system = "x86_64-linux";
       user = "lpenz";
-      urxvtnotify = ./urxvt-notify;
+      urxvtnotify = ./scripts/urxvt-notify;
       pkgs = nixpkgs.legacyPackages.${system};
       mypkgs = {
         execpermfix = execpermfix.packages.${system}.default;
@@ -91,8 +91,9 @@
               "bin/tuzue-manmenu".source = "${mypkgs.tuzue}/bin/tuzue-manmenu";
               "bin/ogle".source = "${mypkgs.ogle}/bin/ogle";
               # local scripts
-              "bin/cleantop" = { executable = true; source = ./cleantop; };
-              "bin/tmux-pstree" = { executable = true; source = ./tmux-pstree; };
+              "bin/cleantop" = { executable = true; source = ./scripts/cleantop; };
+              "bin/tmux-pstree" = { executable = true; source = ./scripts/tmux-pstree; };
+              "bin/urxvt-notify" = { executable = true; source = "${urxvtnotify}"; };
               # regular packages
               "bin/autoflake".source = "${pkgs.autoflake}/bin/autoflake";
               "bin/bat".source = "${pkgs.bat}/bin/bat";
@@ -118,11 +119,6 @@
               # emacs
               "bin/emacs".source = "${pkgs.emacs}/bin/emacs";
               "bin/emacsclient".source = "${pkgs.emacs}/bin/emacsclient";
-              # import local scripts/dotfiles
-              "bin/urxvt-notify" = {
-                executable = true;
-                source = "${urxvtnotify}";
-              };
             };
 
           }
