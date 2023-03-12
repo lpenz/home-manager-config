@@ -92,6 +92,7 @@
               "bin/ogle".source = "${mypkgs.ogle}/bin/ogle";
               # local scripts
               "bin/cleantop" = { executable = true; source = ./scripts/cleantop; };
+              "bin/ssh-tmux" = { executable = true; source = ./scripts/ssh-tmux; };
               "bin/tmux-pstree" = { executable = true; source = ./scripts/tmux-pstree; };
               "bin/urxvt-notify" = { executable = true; source = "${urxvtnotify}"; };
               # regular packages

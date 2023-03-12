@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e -x
+exec ssh -t "$@" tmux new-session -A -s _
+
