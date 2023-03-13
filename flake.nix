@@ -45,6 +45,7 @@
               pkgs.fd
               pkgs.fzf
               pkgs.glibcLocales
+              pkgs.global
               pkgs.htop
               pkgs.nnn
               pkgs.ripgrep
@@ -103,6 +104,13 @@
               "bin/fd".source = "${pkgs.fd}/bin/fd";
               "bin/fish".source = "${pkgs.fish}/bin/fish";
               "bin/fzf".source = "${pkgs.fzf}/bin/fzf";
+              "bin/global".source = "${pkgs.global}/bin/global";
+              "bin/globash".source = "${pkgs.global}/bin/globash";
+              "bin/gozilla".source = "${pkgs.global}/bin/gozilla";
+              "bin/gtags-cscope".source = "${pkgs.global}/bin/gtags-cscope";
+              "bin/gtags".source = "${pkgs.global}/bin/gtags";
+              "bin/htags-server".source = "${pkgs.global}/bin/htags-server";
+              "bin/htags".source = "${pkgs.global}/bin/htags";
               "bin/htop".source = "${pkgs.htop}/bin/htop";
               "bin/nnn" = {
                 executable = true;
