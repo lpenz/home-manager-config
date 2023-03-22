@@ -15,6 +15,7 @@
     set -gx PYTHONSTARTUP $HOME/.pystartup
     set -gx XAUTHORITY $HOME/.Xauthority
     set -gx RUST_SRC_PATH /usr/src/rust/src
+    set -gx SYSTEMD_PAGER ""
     set -U __done_min_cmd_duration 3000
     set -U __done_notification_command "${urxvtnotify} \$title \$message"
     set -U __done_allow_nongraphical 1
