@@ -41,6 +41,7 @@
               pkgs.autoflake
               pkgs.bat
               pkgs.black
+              pkgs.clang-tools
               pkgs.direnv
               pkgs.fd
               pkgs.fzf
@@ -85,6 +86,27 @@
               "bin/nix-prefetch-url".source = "${pkgs.nix}/bin/nix-prefetch-url";
               "bin/nix-shell".source = "${pkgs.nix}/bin/nix-shell";
               "bin/nix-store".source = "${pkgs.nix}/bin/nix-store";
+              # clang
+              "bin/clang-apply-replacements".source = "${pkgs.clang-tools}/bin/clang-apply-replacements";
+              "bin/clang-change-namespace".source = "${pkgs.clang-tools}/bin/clang-change-namespace";
+              "bin/clang-check".source = "${pkgs.clang-tools}/bin/clang-check";
+              "bin/clangd".source = "${pkgs.clang-tools}/bin/clangd";
+              "bin/clang-doc".source = "${pkgs.clang-tools}/bin/clang-doc";
+              "bin/clang-extdef-mapping".source = "${pkgs.clang-tools}/bin/clang-extdef-mapping";
+              "bin/clang-format".source = "${pkgs.clang-tools}/bin/clang-format";
+              "bin/clang-include-fixer".source = "${pkgs.clang-tools}/bin/clang-include-fixer";
+              "bin/clang-linker-wrapper".source = "${pkgs.clang-tools}/bin/clang-linker-wrapper";
+              "bin/clang-move".source = "${pkgs.clang-tools}/bin/clang-move";
+              "bin/clang-nvlink-wrapper".source = "${pkgs.clang-tools}/bin/clang-nvlink-wrapper";
+              "bin/clang-offload-bundler".source = "${pkgs.clang-tools}/bin/clang-offload-bundler";
+              "bin/clang-offload-wrapper".source = "${pkgs.clang-tools}/bin/clang-offload-wrapper";
+              "bin/clang-query".source = "${pkgs.clang-tools}/bin/clang-query";
+              "bin/clang-refactor".source = "${pkgs.clang-tools}/bin/clang-refactor";
+              "bin/clang-rename".source = "${pkgs.clang-tools}/bin/clang-rename";
+              "bin/clang-reorder-fields".source = "${pkgs.clang-tools}/bin/clang-reorder-fields";
+              "bin/clang-repl".source = "${pkgs.clang-tools}/bin/clang-repl";
+              "bin/clang-scan-deps".source = "${pkgs.clang-tools}/bin/clang-scan-deps";
+              "bin/clang-tidy".source = "${pkgs.clang-tools}/bin/clang-tidy";
               # mine
               "bin/execpermfix".source = "${mypkgs.execpermfix}/bin/execpermfix";
               "bin/tuzue-chdir".source = "${mypkgs.tuzue}/bin/tuzue-chdir";
