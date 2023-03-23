@@ -54,7 +54,6 @@
               pkgs.shellcheck
               pkgs.shfmt
               pkgs.topgrade
-              pkgs.zsh
             ];
 
             programs.emacs.enable = true;
@@ -149,7 +148,6 @@
               "bin/shellcheck".source = "${pkgs.shellcheck}/bin/shellcheck";
               "bin/shfmt".source = "${pkgs.shfmt}/bin/shfmt";
               "bin/topgrade".source = "${pkgs.topgrade}/bin/topgrade";
-              "bin/zsh".source = "${pkgs.zsh}/bin/zsh";
               # emacs
               "bin/emacs".source = "${pkgs.emacs}/bin/emacs";
               "bin/emacsclient".source = "${pkgs.emacs}/bin/emacsclient";
