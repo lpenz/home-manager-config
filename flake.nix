@@ -49,6 +49,7 @@
               pkgs.global
               pkgs.htop
               pkgs.nnn
+              pkgs.renameutils
               pkgs.ripgrep
               pkgs.shellcheck
               pkgs.shfmt
@@ -142,6 +143,8 @@
                          exec "${pkgs.nnn}/bin/nnn" "$@"
                        '';
               };
+              "bin/qmv".source = "${pkgs.renameutils}/bin/qmv";
+              "bin/qcp".source = "${pkgs.renameutils}/bin/qcp";
               "bin/rg".source = "${pkgs.ripgrep}/bin/rg";
               "bin/shellcheck".source = "${pkgs.ripgrep}/bin/shellcheck";
               "bin/shfmt".source = "${pkgs.shfmt}/bin/shfmt";
