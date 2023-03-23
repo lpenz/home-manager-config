@@ -146,7 +146,7 @@
               "bin/qmv".source = "${pkgs.renameutils}/bin/qmv";
               "bin/qcp".source = "${pkgs.renameutils}/bin/qcp";
               "bin/rg".source = "${pkgs.ripgrep}/bin/rg";
-              "bin/shellcheck".source = "${pkgs.ripgrep}/bin/shellcheck";
+              "bin/shellcheck".source = "${pkgs.shellcheck}/bin/shellcheck";
               "bin/shfmt".source = "${pkgs.shfmt}/bin/shfmt";
               "bin/topgrade".source = "${pkgs.topgrade}/bin/topgrade";
               "bin/zsh".source = "${pkgs.zsh}/bin/zsh";
