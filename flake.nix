@@ -116,6 +116,8 @@
               # local scripts
               "bin/cleantop" = { executable = true; source = ./scripts/cleantop; };
               "bin/ssh-tmux" = { executable = true; source = ./scripts/ssh-tmux; };
+              "bin/ssh-nohostkey" = { executable = true; source = ./scripts/ssh-nohostkey; };
+              "bin/ssh-tmux-nohostkey" = { executable = true; source = ./scripts/ssh-tmux-nohostkey; };
               "bin/tmux-pstree" = { executable = true; source = ./scripts/tmux-pstree; };
               "bin/urxvt-notify" = { executable = true; source = "${urxvtnotify}"; };
               # regular packages

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+set -e -x
+exec ssh-nohostkey -t "$@" tmux new-session -A -s _
