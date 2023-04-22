@@ -115,6 +115,7 @@
               "bin/ogle".source = "${mypkgs.ogle}/bin/ogle";
               # local scripts
               "bin/cleantop" = { executable = true; source = ./scripts/cleantop; };
+              "bin/fish-tide-setup" = { executable = true; source = ./scripts/fish-tide-setup; };
               "bin/ssh-tmux" = { executable = true; source = ./scripts/ssh-tmux; };
               "bin/ssh-nohostkey" = { executable = true; source = ./scripts/ssh-nohostkey; };
               "bin/ssh-tmux-nohostkey" = { executable = true; source = ./scripts/ssh-tmux-nohostkey; };
