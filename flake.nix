@@ -2,7 +2,7 @@
   description = "lpenz's home-manager config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,7 +29,7 @@
         modules = [
           {
             programs.home-manager.enable = true;
-            home.stateVersion = "22.11";
+            home.stateVersion = "23.05";
             home.username = "${user}";
             home.homeDirectory = "/home/${user}";
 
