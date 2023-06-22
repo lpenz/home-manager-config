@@ -16,4 +16,9 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
           extra_nix_config: 'experimental-features = nix-command flakes'
       - run: nix flake check
+      - run: sudo ln -s runner lpenz
+        working-directory: /home
       - run: nix run '.#homeConfigurations.lpenz.activationPackage'
+        env:
+          USER: lpenz
+          HOME: /home/lpenz
