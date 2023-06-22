@@ -4,4 +4,3 @@ set -e -x
 
 rm -rf /nix/store/ /nix/var/
 rm -rf ~/.cache/nix/ ~/.cache/nix-index/ ~/.local/share/nix/ ~/.local/state/home-manager/ ~/.local/state/nix/ ~/.nix-channels ~/.nix-defexpr/ ~/.nix-profile/
-

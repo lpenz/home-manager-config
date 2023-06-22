@@ -5,7 +5,8 @@ vers=23.05
 set -e -x
 
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
-source ~/.nix-profile/etc/profile.d/nix.sh
+# shellcheck disable=SC1090,SC1091
+source "$HOME/.nix-profile/etc/profile.d/nix.sh"
 nix-channel --remove nixpkgs
 nix-channel --add "https://nixos.org/channels/nixos-${vers}" "nixpkgs"
 nix-channel --update -v
@@ -23,4 +24,3 @@ nix-shell '<home-manager>' -A install
 rm -f ~/.config/home-manager/home.nix ~/.config/nixpkgs/home.nix
 home-manager switch -v
 nix-collect-garbage -d
-
