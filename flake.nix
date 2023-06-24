@@ -56,6 +56,9 @@
               pkgs.topgrade
             ];
 
+            nix.package = pkgs.nix;
+            nix.settings = (import ./nix.conf.nix);
+
             programs.emacs.enable = true;
 
             # Fish
@@ -63,7 +66,7 @@
               inherit pkgs urxvtnotify;
             };
 
-            # Install executables in ~/bin
+            # Install home files:
             home.file = {
               # nix's own
               "bin/home-manager".source = "${pkgs.home-manager}/bin/home-manager";
