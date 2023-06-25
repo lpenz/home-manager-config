@@ -7,12 +7,13 @@
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    cachix.url = "github:cachix/cachix";
     execpermfix.url = "github:lpenz/execpermfix";
     tuzue.url = "github:lpenz/tuzue";
     ogle.url = "github:lpenz/ogle";
   };
 
-  outputs = { nixpkgs, home-manager, execpermfix, tuzue, ogle, ... }:
+  outputs = { nixpkgs, home-manager, cachix, execpermfix, tuzue, ogle, ... }:
     let
       system = "x86_64-linux";
       user = "lpenz";
@@ -41,6 +42,7 @@
               pkgs.autoflake
               pkgs.bat
               pkgs.black
+              pkgs.cachix
               pkgs.clang-tools
               pkgs.direnv
               pkgs.fd
@@ -128,6 +130,7 @@
               "bin/autoflake".source = "${pkgs.autoflake}/bin/autoflake";
               "bin/bat".source = "${pkgs.bat}/bin/bat";
               "bin/black".source = "${pkgs.black}/bin/black";
+              "bin/cachix".source = "${pkgs.cachix}/bin/cachix";
               "bin/direnv".source = "${pkgs.direnv}/bin/direnv";
               "bin/fd".source = "${pkgs.fd}/bin/fd";
               "bin/fish".source = "${pkgs.fish}/bin/fish";
