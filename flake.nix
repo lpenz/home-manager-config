@@ -9,11 +9,12 @@
     };
     cachix.url = "github:cachix/cachix";
     execpermfix.url = "github:lpenz/execpermfix";
-    tuzue.url = "github:lpenz/tuzue";
     ogle.url = "github:lpenz/ogle";
+    stdecor.url = "github:lpenz/stdecor";
+    tuzue.url = "github:lpenz/tuzue";
   };
 
-  outputs = { nixpkgs, home-manager, cachix, execpermfix, tuzue, ogle, ... }:
+  outputs = { nixpkgs, home-manager, cachix, execpermfix, ogle, stdecor, tuzue, ... }:
     let
       system = "x86_64-linux";
       user = "lpenz";
@@ -22,6 +23,7 @@
       mypkgs = {
         execpermfix = execpermfix.packages.${system}.default;
         ogle = ogle.packages.${system}.default;
+        stdecor = stdecor.packages.${system}.default;
         tuzue = tuzue.packages.${system}.default;
       };
     in {
@@ -36,8 +38,9 @@
 
             home.packages = [
               mypkgs.execpermfix
-              mypkgs.tuzue
               mypkgs.ogle
+              mypkgs.stdecor
+              mypkgs.tuzue
 
               pkgs.autoflake
               pkgs.bat
@@ -114,10 +117,11 @@
               "bin/clang-tidy".source = "${pkgs.clang-tools}/bin/clang-tidy";
               # mine
               "bin/execpermfix".source = "${mypkgs.execpermfix}/bin/execpermfix";
+              "bin/ogle".source = "${mypkgs.ogle}/bin/ogle";
+              "bin/stdecor".source = "${mypkgs.stdecor}/bin/stdecor";
               "bin/tuzue-chdir".source = "${mypkgs.tuzue}/bin/tuzue-chdir";
               "bin/tuzue-json".source = "${mypkgs.tuzue}/bin/tuzue-json";
               "bin/tuzue-manmenu".source = "${mypkgs.tuzue}/bin/tuzue-manmenu";
-              "bin/ogle".source = "${mypkgs.ogle}/bin/ogle";
               # local scripts
               "bin/cleantop" = { executable = true; source = ./scripts/cleantop; };
               "bin/fish-tide-setup" = { executable = true; source = ./scripts/fish-tide-setup; };
