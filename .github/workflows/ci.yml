@@ -20,14 +20,36 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
           extra_nix_config: 'experimental-features = nix-command flakes'
       - run: nix flake check
+      - name: Install home-manager
+        run: |
+          set -e -x; \
+          nix-channel --add "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz" home-manager; \
+          nix-channel --update -v; \
+          export NIX_PATH=${NIX_PATH:+$NIX_PATH:}$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels; \
+          nix-shell '<home-manager>' -A install
+      - name: Set up repository as home-manager
+        run: |
+          set -e -x; \
+          dir=$PWD; \
+          cd /home; \
+          sudo ln -s runner lpenz; \
+          cd /home/runner/.config; \
+          rm -rf home-manager nixpkgs; \
+          ln -s "$dir" home-manager; \
+      - run: home-manager switch -b backup
+        env:
+          USER: lpenz
+          HOME: /home/lpenz
+      - name: Set up repository as home-manager
+        run: |
+          set -e -x; \
+          cp -Lv /home/runner/.config/nix/nix.conf /tmp/nix.conf; \
+          chmod +w /tmp/nix.conf; \
+          rm -f /home/runner/.config/nix/nix.conf; \
+          mv -v /tmp/nix.conf /home/runner/.config/nix/nix.conf; \
+          ls -l /home/runner/.config/nix/nix.conf
       - uses: cachix/cachix-action@v12
         with:
           skipPush: ${{ steps.version.outputs.version_commit == '' }}
           name: lpenz
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: sudo ln -s runner lpenz
-        working-directory: /home
-      - run: nix run '.#homeConfigurations.lpenz.activationPackage'
-        env:
-          USER: lpenz
-          HOME: /home/lpenz
