@@ -35,6 +35,9 @@
     bind \e\x7f backward-kill-bigword
     bind \eb backward-bigword
     bind \cx\ce edit_command_buffer
+    if test -e "$HOME/.fishrc.local"
+        source "$HOME/.fishrc.local"
+    end
     '';
   plugins = [
     { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish.src; }
