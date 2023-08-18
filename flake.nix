@@ -134,6 +134,7 @@
               "bin/ssh-tmux-nohostkey" = { executable = true; source = ./scripts/ssh-tmux-nohostkey; };
               "bin/tmux-pstree" = { executable = true; source = ./scripts/tmux-pstree; };
               "bin/urxvt-notify" = { executable = true; source = "${urxvtnotify}"; };
+              "bin/view-dot" = { executable = true; source = ./scripts/view-dot; };
               # regular packages
               "bin/autoflake".source = "${pkgs.autoflake}/bin/autoflake";
               "bin/bat".source = "${pkgs.bat}/bin/bat";

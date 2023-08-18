@@ -1,0 +1,12 @@
+#!/bin/bash
+
+DOTFILE="${1?usage: $0 file.dot}"
+
+set -e -x
+
+TMP_PDF=$(mktemp --suffix=.pdf)
+trap 'rm -f "$TMP_PDF"' EXIT
+
+dot -Tpdf "-o$TMP_PDF" "$DOTFILE"
+see "$TMP_PDF"
+
