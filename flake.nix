@@ -75,7 +75,12 @@
             };
 
             # Install home files:
-            home.file = {
+            home.file = let
+              script_import = file: {
+                executable = true;
+                text = (import file) { inherit pkgs; };
+              };
+              in {
               # nix's own
               "bin/home-manager".source = "${pkgs.home-manager}/bin/home-manager";
               "bin/nix" = {
@@ -129,8 +134,10 @@
               # local scripts
               "bin/cleantop" = { executable = true; source = ./scripts/cleantop; };
               "bin/fish-tide-setup" = { executable = true; source = ./scripts/fish-tide-setup; };
-              "bin/ssh-tmux" = { executable = true; source = ./scripts/ssh-tmux; };
-              "bin/ssh-nohostkey" = { executable = true; source = ./scripts/ssh-nohostkey; };
+              # "bin/ssh-tmux" = { executable = true; source = ./scripts/ssh-tmux; };
+              "bin/ssh-tmux" = (script_import ./scripts/ssh-tmux);
+              # "bin/ssh-nohostkey" = (import ./scripts/ssh-nohostkey) { inherit pkgs; };
+              "bin/ssh-nohostkey" = { executable = true; text = (import ./scripts/ssh-nohostkey) { inherit pkgs; }; };
               "bin/ssh-tmux-nohostkey" = { executable = true; source = ./scripts/ssh-tmux-nohostkey; };
               "bin/tmux-pstree" = { executable = true; source = ./scripts/tmux-pstree; };
               "bin/urxvt-notify" = { executable = true; source = "${urxvtnotify}"; };

@@ -1,4 +1,8 @@
-#!/bin/bash
+{ pkgs }:
+''
+#!${ pkgs.bash }/bin/bash
 
 set -e -x
 exec ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$@"
+''
+

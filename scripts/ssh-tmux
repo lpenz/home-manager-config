@@ -1,5 +1,8 @@
-#!/bin/bash
+{ pkgs }:
+''
+#!${ pkgs.bash }/bin/bash
 
 set -e -x
-exec ssh -t "$@" tmux new-session -A -s _
+exec ${ pkgs.openssh }/bin/ssh -t "$@" tmux new-session -A -s _
+''
 
