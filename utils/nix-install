@@ -12,7 +12,6 @@ nix-channel --add "https://nixos.org/channels/nixos-${vers}" "nixpkgs"
 nix-channel --update -v
 nix-env -iA nixpkgs.nix
 nix-env -u
-nix-collect-garbage -d
 if [ "$vers" = unstable ]; then
     nix-channel --add "https://github.com/nix-community/home-manager/archive/master.tar.gz" home-manager
 else
@@ -23,4 +22,4 @@ export NIX_PATH=${NIX_PATH:+$NIX_PATH:}$HOME/.nix-defexpr/channels:/nix/var/nix/
 nix-shell '<home-manager>' -A install
 rm -f ~/.config/home-manager/home.nix ~/.config/nixpkgs/home.nix
 home-manager switch -v
-nix-collect-garbage -d
+
