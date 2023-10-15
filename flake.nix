@@ -28,7 +28,8 @@
         stdecor = stdecor.packages.${system}.default;
         tuzue = tuzue.packages.${system}.default;
       };
-    in {
+    in
+    {
       homeConfigurations.lpenz = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
@@ -56,6 +57,7 @@
               pkgs.glibcLocales
               pkgs.global
               pkgs.htop
+              pkgs.nixpkgs-fmt
               pkgs.nnn
               pkgs.renameutils
               pkgs.ripgrep
@@ -81,10 +83,10 @@
               "bin/nix" = {
                 executable = true;
                 text = ''
-                         #!/bin/bash
-                         PATH="$HOME/.nix-profile/bin:$PATH"
-                         exec ${pkgs.nix}/bin/nix "$@"
-                       '';
+                  #!/bin/bash
+                  PATH="$HOME/.nix-profile/bin:$PATH"
+                  exec ${pkgs.nix}/bin/nix "$@"
+                '';
               };
               "bin/nix-build".source = "${pkgs.nix}/bin/nix-build";
               "bin/nix-channel".source = "${pkgs.nix}/bin/nix-channel";
@@ -151,13 +153,14 @@
               "bin/htags-server".source = "${pkgs.global}/bin/htags-server";
               "bin/htags".source = "${pkgs.global}/bin/htags";
               "bin/htop".source = "${pkgs.htop}/bin/htop";
+              "bin/nixpkgs-fmt".source = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
               "bin/nnn" = {
                 executable = true;
                 text = ''
-                         #!/bin/bash
-                         export PAGER=less
-                         exec "${pkgs.nnn}/bin/nnn" "$@"
-                       '';
+                  #!/bin/bash
+                  export PAGER=less
+                  exec "${pkgs.nnn}/bin/nnn" "$@"
+                '';
               };
               "bin/qmv".source = "${pkgs.renameutils}/bin/qmv";
               "bin/qcp".source = "${pkgs.renameutils}/bin/qcp";

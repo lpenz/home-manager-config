@@ -38,7 +38,7 @@
     if test -e "$HOME/.fishrc.local"
         source "$HOME/.fishrc.local"
     end
-    '';
+  '';
   plugins = [
     { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish.src; }
     { name = "sponge"; src = pkgs.fishPlugins.sponge.src; }
