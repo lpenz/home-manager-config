@@ -11,7 +11,7 @@
     disk-img-tool.url = "github:lpenz/disk-img-tool";
     execpermfix.url = "github:lpenz/execpermfix";
     ogle.url = "github:lpenz/ogle";
-    stdecor.url = "github:lpenz/stdecor";
+    stdecor.url = "github:lpenz/stdecor/v0.1.6";
     tuzue.url = "github:lpenz/tuzue";
   };
 
