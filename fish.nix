@@ -19,6 +19,7 @@
     set -U __done_min_cmd_duration 3000
     set -U __done_notification_command "${urxvtnotify} \$title \$message"
     set -U __done_allow_nongraphical 1
+    set --prepend fish_function_path ${pkgs.fzf}/share/fish/vendor_functions.d
     fzf_configure_bindings --directory=\ct
     fzf_configure_bindings --variables=
     fzf_key_bindings
@@ -40,7 +41,6 @@
     end
   '';
   plugins = [
-    { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish.src; }
     { name = "sponge"; src = pkgs.fishPlugins.sponge.src; }
     { name = "tide"; src = pkgs.fishPlugins.tide.src; }
     { name = "done"; src = pkgs.fishPlugins.done.src; }
