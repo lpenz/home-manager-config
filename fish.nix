@@ -5,7 +5,7 @@
     # Commands to run in interactive sessions can go here
     set fish_greeting
     fish_add_path "$HOME/bin"
-    set -Ux LOCALE_ARCHIVE_2_27 $HOME/.nix-profile/lib/locale/locale-archive
+    set -gx LOCALE_ARCHIVE_2_27 "${pkgs.glibcLocales}/lib/locale/locale-archive"
     set -gx EDITOR vim
     set -gx VISUAL vim
     set -gx LC_ALL en_US.UTF-8
