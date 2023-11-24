@@ -12,10 +12,9 @@
     execpermfix.url = "github:lpenz/execpermfix";
     ogle.url = "github:lpenz/ogle";
     stdecor.url = "github:lpenz/stdecor/v0.1.6";
-    tuzue.url = "github:lpenz/tuzue";
   };
 
-  outputs = { nixpkgs, home-manager, cachix, disk-img-tool, execpermfix, ogle, stdecor, tuzue, ... }:
+  outputs = { nixpkgs, home-manager, cachix, disk-img-tool, execpermfix, ogle, stdecor, ... }:
     let
       system = "x86_64-linux";
       user = "lpenz";
@@ -26,7 +25,6 @@
         execpermfix = execpermfix.packages.${system}.default;
         ogle = ogle.packages.${system}.default;
         stdecor = stdecor.packages.${system}.default;
-        tuzue = tuzue.packages.${system}.default;
       };
     in
     {
@@ -44,7 +42,6 @@
               mypkgs.execpermfix
               mypkgs.ogle
               mypkgs.stdecor
-              mypkgs.tuzue
 
               pkgs.autoflake
               pkgs.bat
@@ -125,9 +122,6 @@
               "bin/execpermfix".source = "${mypkgs.execpermfix}/bin/execpermfix";
               "bin/ogle".source = "${mypkgs.ogle}/bin/ogle";
               "bin/stdecor".source = "${mypkgs.stdecor}/bin/stdecor";
-              "bin/tuzue-chdir".source = "${mypkgs.tuzue}/bin/tuzue-chdir";
-              "bin/tuzue-json".source = "${mypkgs.tuzue}/bin/tuzue-json";
-              "bin/tuzue-manmenu".source = "${mypkgs.tuzue}/bin/tuzue-manmenu";
               # local scripts
               "bin/cleantop" = { executable = true; source = ./scripts/cleantop; };
               "bin/fish-tide-setup" = { executable = true; source = ./scripts/fish-tide-setup; };

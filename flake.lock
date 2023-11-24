@@ -208,21 +208,6 @@
         "type": "github"
       }
     },
-    "flake-utils_6": {
-      "locked": {
-        "lastModified": 1667395993,
-        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -451,22 +436,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_8": {
-      "locked": {
-        "lastModified": 1669152211,
-        "narHash": "sha256-mBLiTNTzrtlYPHF0bL8NeGA4n8K5b35fYVdqaTIIkgc=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "56ca700ceabcfa15396bcf581a1296e8e27ad677",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-22.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "ogle": {
       "inputs": {
         "flake-utils": "flake-utils_4",
@@ -519,8 +488,7 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_5",
         "ogle": "ogle",
-        "stdecor": "stdecor",
-        "tuzue": "tuzue"
+        "stdecor": "stdecor"
       }
     },
     "stdecor": {
@@ -615,25 +583,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "tuzue": {
-      "inputs": {
-        "flake-utils": "flake-utils_6",
-        "nixpkgs": "nixpkgs_8"
-      },
-      "locked": {
-        "lastModified": 1680465014,
-        "narHash": "sha256-mrYEzD7PwL44+moKJ1GWPK5FP201UBoy4S2rxv32CwM=",
-        "owner": "lpenz",
-        "repo": "tuzue",
-        "rev": "1be02ade91fb413b50ecbb6518d74269bd233c9c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "lpenz",
-        "repo": "tuzue",
         "type": "github"
       }
     }
