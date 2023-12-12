@@ -2,9 +2,9 @@
   description = "lpenz's home-manager config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     cachix.url = "github:cachix/cachix";
@@ -33,7 +33,7 @@
         modules = [
           {
             programs.home-manager.enable = true;
-            home.stateVersion = "23.05";
+            home.stateVersion = "23.11";
             home.username = "${user}";
             home.homeDirectory = "/home/${user}";
 
@@ -124,7 +124,23 @@
               "bin/stdecor".source = "${mypkgs.stdecor}/bin/stdecor";
               # local scripts
               "bin/cleantop" = { executable = true; source = ./scripts/cleantop; };
-              "bin/fish-tide-setup" = { executable = true; source = ./scripts/fish-tide-setup; };
+              "bin/fish-tide-setup" = {
+                executable = true;
+                text = ''
+                  #!${pkgs.fish}/bin/fish
+
+                  tide configure \
+                       --auto \
+                       --style=Lean \
+                       --prompt_colors='True color' \
+                       --show_time='24-hour format' \
+                       --lean_prompt_height='Two lines' \
+                       --prompt_connection=Disconnected \
+                       --prompt_spacing=Sparse \
+                       --icons='Many icons' \
+                       --transient=No
+                '';
+              };
               "bin/ssh-tmux" = { executable = true; source = ./scripts/ssh-tmux; };
               "bin/ssh-nohostkey" = { executable = true; source = ./scripts/ssh-nohostkey; };
               "bin/ssh-tmux-nohostkey" = { executable = true; source = ./scripts/ssh-tmux-nohostkey; };

@@ -1,3 +1,0 @@
-#!/bin/bash
-
-fish -c 'printf 1122122y | tide configure'
