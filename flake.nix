@@ -66,7 +66,10 @@
             nix.package = pkgs.nix;
             nix.settings = (import ./nix.conf.nix);
 
-            programs.emacs.enable = true;
+            programs.emacs = {
+              enable = true;
+              package = pkgs.emacs29;
+            };
 
             # Fish
             programs.fish = (import ./fish.nix) {
@@ -179,8 +182,8 @@
               "bin/shfmt".source = "${pkgs.shfmt}/bin/shfmt";
               "bin/topgrade".source = "${pkgs.topgrade}/bin/topgrade";
               # emacs
-              "bin/emacs".source = "${pkgs.emacs}/bin/emacs";
-              "bin/emacsclient".source = "${pkgs.emacs}/bin/emacsclient";
+              "bin/emacs".source = "${pkgs.emacs29}/bin/emacs";
+              "bin/emacsclient".source = "${pkgs.emacs29}/bin/emacsclient";
             };
 
           }
