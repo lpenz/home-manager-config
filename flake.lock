@@ -485,11 +485,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1710072756,
-        "narHash": "sha256-i4uDvQwTRBRu4KbM4ADd51NfANLEO/093lYVxiGbAoA=",
+        "lastModified": 1711824124,
+        "narHash": "sha256-kJAQ4KUsBDxPbTeOEDiD7oIT3fROaYIpOeazZzCuGp8=",
         "owner": "lpenz",
         "repo": "ogle",
-        "rev": "3a8ded6aacb574540c3a4a4c5a2da7ac098d6b1e",
+        "rev": "d57a18816fe17873773193c3e017801572c7f3d5",
         "type": "github"
       },
       "original": {
