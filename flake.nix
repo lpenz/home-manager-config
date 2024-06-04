@@ -76,6 +76,10 @@
               inherit pkgs urxvtnotify;
             };
 
+            programs.neovim = (import ./neovim.nix) {
+              inherit pkgs;
+            };
+
             # Install home files:
             home.file = {
               # nix's own
@@ -177,6 +181,16 @@
                   #!/bin/bash
                   export PAGER=less
                   exec "${pkgs.nnn}/bin/nnn" "$@"
+                '';
+              };
+              "bin/nvim".source = "${pkgs.neovim}/bin/nvim";
+              "bin/vi".source = "${pkgs.neovim}/bin/nvim";
+              "bin/vim".source = "${pkgs.neovim}/bin/nvim";
+              "bin/vimdiff" = {
+                executable = true;
+                text = ''
+                  #!/bin/bash
+                  exec "${pkgs.neovim}/bin/nvim" -d "$@"
                 '';
               };
               "bin/qmv".source = "${pkgs.renameutils}/bin/qmv";
