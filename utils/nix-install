@@ -1,6 +1,6 @@
 #!/bin/bash
 
-vers=23.05
+vers=24.05
 
 set -e -x
 
@@ -22,4 +22,3 @@ export NIX_PATH=${NIX_PATH:+$NIX_PATH:}$HOME/.nix-defexpr/channels:/nix/var/nix/
 nix-shell '<home-manager>' -A install
 rm -f ~/.config/home-manager/home.nix ~/.config/nixpkgs/home.nix
 home-manager switch -v
-

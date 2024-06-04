@@ -2,9 +2,9 @@
   description = "lpenz's home-manager config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     cachix.url = "github:cachix/cachix";
@@ -33,7 +33,7 @@
         modules = [
           {
             programs.home-manager.enable = true;
-            home.stateVersion = "23.11";
+            home.stateVersion = "24.05";
             home.username = "${user}";
             home.homeDirectory = "/home/${user}";
 
