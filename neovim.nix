@@ -1,26 +1,23 @@
 { pkgs }:
 {
   enable = true;
-  extraConfig = ''
-    let g:mapleader=' '
+  extraLuaConfig = ''
+    vim.g.mapleader = ' '
 
-    set expandtab tabstop=4 shiftwidth=4
-    set autowriteall
-    set noswapfile
-    set nowrap
+    vim.opt.expandtab = true
+    vim.opt.tabstop = 4
+    vim.opt.shiftwidth = 4
+    vim.opt.autowriteall = true
+    vim.opt.swapfile = false
+    vim.opt.wrap = false
+    vim.opt.makeprg = 'omnibuild'
 
-    nnoremap <silent> <F2> :update!<CR>
-    set makeprg=omnibuild
-    nnoremap <silent> <F10> :make<CR>
+    vim.keymap.set('n', '<F2>', ':update!<CR>')
+    vim.keymap.set('n', '<F10>', ':make<CR>')
+    vim.keymap.set('n', '<C-C>', ':qa!<CR>')
 
-    nnoremap <silent> <C-C> :qa!<CR>
-
-    " visual search
-    xnoremap * y/\V<C-R>=substitute(escape(@@,"/\\"),"\n","\\\\n","ge")<CR><CR>
-    xnoremap # y?\V<C-R>=substitute(escape(@@,"?\\"),"\n","\\\\n","ge")<CR><CR>
-
-    if executable('rg')
-       set grepprg=rg\ --vimgrep\ -g\ '!/tags'
-    endif
+    if vim.fn.executable('rg') then
+        vim.opt.grepprg = 'rg --vimgrep -g "!/tags"'
+    end
   '';
 }
