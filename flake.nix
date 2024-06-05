@@ -8,13 +8,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     cachix.url = "github:cachix/cachix";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     disk-img-tool.url = "github:lpenz/disk-img-tool";
     execpermfix.url = "github:lpenz/execpermfix";
     ogle.url = "github:lpenz/ogle";
     stdecor.url = "github:lpenz/stdecor";
   };
 
-  outputs = { nixpkgs, home-manager, cachix, disk-img-tool, execpermfix, ogle, stdecor, ... }:
+  outputs = { self, nixpkgs, home-manager, cachix, nixvim, disk-img-tool, execpermfix, ogle, stdecor, ... }:
     let
       system = "x86_64-linux";
       user = "lpenz";
@@ -26,11 +30,19 @@
         ogle = ogle.packages.${system}.default;
         stdecor = stdecor.packages.${system}.default;
       };
+      binwrap = name: {
+        executable = true;
+        text = ''
+          #!/bin/bash
+          exec "$HOME/.nix-profile/bin/${name}" "$@"
+        '';
+      };
     in
     {
       homeConfigurations.lpenz = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
+          nixvim.homeManagerModules.nixvim
           {
             programs.home-manager.enable = true;
             home.stateVersion = "24.05";
@@ -76,7 +88,8 @@
               inherit pkgs urxvtnotify;
             };
 
-            programs.neovim = (import ./neovim.nix) {
+            # neovim
+            programs.nixvim = (import ./neovim.nix) {
               inherit pkgs;
             };
 
@@ -183,16 +196,10 @@
                   exec "${pkgs.nnn}/bin/nnn" "$@"
                 '';
               };
-              "bin/nvim".source = "${pkgs.neovim}/bin/nvim";
-              "bin/vi".source = "${pkgs.neovim}/bin/nvim";
-              "bin/vim".source = "${pkgs.neovim}/bin/nvim";
-              "bin/vimdiff" = {
-                executable = true;
-                text = ''
-                  #!/bin/bash
-                  exec "${pkgs.neovim}/bin/nvim" -d "$@"
-                '';
-              };
+              "bin/nvim" = binwrap "nvim";
+              "bin/vim" = binwrap "vim";
+              "bin/vi" = binwrap "vi";
+              "bin/vimdiff" = binwrap "vimdiff";
               "bin/qmv".source = "${pkgs.renameutils}/bin/qmv";
               "bin/qcp".source = "${pkgs.renameutils}/bin/qcp";
               "bin/rg".source = "${pkgs.ripgrep}/bin/rg";

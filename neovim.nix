@@ -1,7 +1,10 @@
 { pkgs }:
 {
   enable = true;
-  extraLuaConfig = ''
+  viAlias = true;
+  vimAlias = true;
+  vimdiffAlias = true;
+  extraConfigLua = ''
     vim.g.mapleader = ' '
 
     vim.opt.expandtab = true
