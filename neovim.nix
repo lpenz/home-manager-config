@@ -17,6 +17,7 @@
     tabstop = 4;
     wrap = false;
   };
+  colorschemes.gruvbox.enable = true;
   keymaps = [
     {
       mode = "n";
@@ -42,9 +43,15 @@
         vim.opt.grepprg = 'rg --vimgrep -g "!/tags"'
     end
   '';
-  plugins.treesitter = {
+  plugins.airline = {
     enable = true;
+    settings = {
+      symbols_ascii = true;
+    };
   };
+  # plugins.treesitter = {
+  #   enable = true;
+  # };
   plugins.telescope = {
     enable = true;
     keymaps = {
