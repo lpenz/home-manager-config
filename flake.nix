@@ -204,7 +204,13 @@
               "bin/qcp".source = "${pkgs.renameutils}/bin/qcp";
               "bin/rg".source = "${pkgs.ripgrep}/bin/rg";
               "bin/shellcheck".source = "${pkgs.shellcheck}/bin/shellcheck";
-              "bin/shfmt".source = "${pkgs.shfmt}/bin/shfmt";
+              "bin/shfmt" = {
+                executable = true;
+                text = ''
+                  #!/bin/bash
+                  exec "${pkgs.shfmt}/bin/shfmt" -i 4 "$@"
+                '';
+              };
               "bin/topgrade".source = "${pkgs.topgrade}/bin/topgrade";
               # emacs
               "bin/emacs".source = "${pkgs.emacs29}/bin/emacs";
