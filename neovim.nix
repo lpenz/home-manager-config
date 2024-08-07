@@ -18,6 +18,9 @@
     wrap = false;
   };
   colorschemes.gruvbox.enable = true;
+  extraPlugins = [
+    pkgs.vimPlugins.vim-dirdiff
+  ];
   keymaps = [
     {
       mode = "n";
