@@ -41,6 +41,10 @@
         commandline -f execute
     end
     bind -k f10 fish-omnibuild
+    function fish-append-cwd
+        commandline -i {$PWD}/
+    end
+    bind \ew fish-append-cwd
     if test -e "$HOME/.fishrc.local"
         source "$HOME/.fishrc.local"
     end
