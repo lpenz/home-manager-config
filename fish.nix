@@ -36,7 +36,11 @@
     bind \e\x7f backward-kill-bigword
     bind \eb backward-bigword
     bind \cx\ce edit_command_buffer
-    bind -k f10 omnibuild
+    function fish-omnibuild
+        commandline -r omnibuild
+        commandline -f execute
+    end
+    bind -k f10 fish-omnibuild
     if test -e "$HOME/.fishrc.local"
         source "$HOME/.fishrc.local"
     end
