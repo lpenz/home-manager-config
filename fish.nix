@@ -45,6 +45,11 @@
         commandline -i {$PWD}/
     end
     bind \ew fish-append-cwd
+    function fish-sudo-line
+        fish_commandline_prepend sudo
+    end
+    bind \e1 fish-sudo-line
+    bind \e! fish-sudo-line
     if test -e "$HOME/.fishrc.local"
         source "$HOME/.fishrc.local"
     end
