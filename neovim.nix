@@ -12,6 +12,7 @@
     expandtab = true;
     ignorecase = true;
     makeprg = "omnibuild";
+    mouse = "";
     shiftwidth = 4;
     swapfile = false;
     tabstop = 4;
