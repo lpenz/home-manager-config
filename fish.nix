@@ -53,6 +53,10 @@
     if test -e "$HOME/.fishrc.local"
         source "$HOME/.fishrc.local"
     end
+    function fish-pager-vim
+        fish_commandline_append ' 2>&1 | vi -'
+    end
+    bind \ei fish-pager-vim
   '';
   plugins = [
     { name = "sponge"; src = pkgs.fishPlugins.sponge.src; }
