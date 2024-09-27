@@ -12,20 +12,18 @@
       url = "github:nix-community/nixvim/nixos-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    disk-img-tool.url = "github:lpenz/disk-img-tool";
     execpermfix.url = "github:lpenz/execpermfix";
     ogle.url = "github:lpenz/ogle";
     stdecor.url = "github:lpenz/stdecor";
   };
 
-  outputs = { self, nixpkgs, home-manager, cachix, nixvim, disk-img-tool, execpermfix, ogle, stdecor, ... }:
+  outputs = { self, nixpkgs, home-manager, cachix, nixvim, execpermfix, ogle, stdecor, ... }:
     let
       system = "x86_64-linux";
       user = "lpenz";
       urxvtnotify = ./scripts/urxvt-notify;
       pkgs = nixpkgs.legacyPackages.${system};
       mypkgs = {
-        disk-img-tool = disk-img-tool.packages.${system}.default;
         execpermfix = execpermfix.packages.${system}.default;
         ogle = ogle.packages.${system}.default;
         stdecor = stdecor.packages.${system}.default;
@@ -50,7 +48,6 @@
             home.homeDirectory = "/home/${user}";
 
             home.packages = [
-              mypkgs.disk-img-tool
               mypkgs.execpermfix
               mypkgs.ogle
               mypkgs.stdecor
@@ -138,7 +135,6 @@
               "bin/clang-scan-deps".source = "${pkgs.clang-tools}/bin/clang-scan-deps";
               "bin/clang-tidy".source = "${pkgs.clang-tools}/bin/clang-tidy";
               # mine
-              "bin/disk-img-tool".source = "${mypkgs.disk-img-tool}/bin/disk-img-tool";
               "bin/execpermfix".source = "${mypkgs.execpermfix}/bin/execpermfix";
               "bin/ogle".source = "${mypkgs.ogle}/bin/ogle";
               "bin/stdecor".source = "${mypkgs.stdecor}/bin/stdecor";
