@@ -21,6 +21,7 @@
   colorschemes.gruvbox.enable = true;
   extraPlugins = [
     pkgs.vimPlugins.vim-dirdiff
+    pkgs.vimPlugins.align
   ];
   keymaps = [
     {
@@ -34,6 +35,12 @@
       key = "<F10>";
       action = "<cmd>make<CR>";
       options = { desc = "Compile project."; silent = true; };
+    }
+    {
+      mode = "n";
+      key = "<leader><tab>";
+      action = "<C-^>";
+      options = { desc = "Go to alternate-file"; };
     }
     {
       mode = "n";
