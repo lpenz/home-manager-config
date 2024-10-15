@@ -11,6 +11,7 @@
     autowriteall = true;
     expandtab = true;
     ignorecase = true;
+    incsearch = false;
     makeprg = "omnibuild";
     mouse = "";
     shiftwidth = 4;
