@@ -58,8 +58,11 @@
   plugins.airline = {
     enable = true;
     settings = {
-      symbols_ascii = true;
+      symbols_ascii = 1;
     };
+  };
+  plugins.web-devicons = {
+      enable = true;
   };
   # plugins.treesitter = {
   #   enable = true;

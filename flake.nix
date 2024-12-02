@@ -2,14 +2,14 @@
   description = "lpenz's home-manager config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     cachix.url = "github:cachix/cachix";
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-24.05";
+      url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     execpermfix.url = "github:lpenz/execpermfix";
@@ -43,7 +43,7 @@
           nixvim.homeManagerModules.nixvim
           {
             programs.home-manager.enable = true;
-            home.stateVersion = "24.05";
+            home.stateVersion = "24.11";
             home.username = "${user}";
             home.homeDirectory = "/home/${user}";
 

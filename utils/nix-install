@@ -1,6 +1,6 @@
 #!/bin/bash
 
-vers=24.05
+vers=24.11
 
 set -e -x
 
