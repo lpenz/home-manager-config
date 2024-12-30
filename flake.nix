@@ -211,6 +211,12 @@
               # emacs
               "bin/emacs".source = "${pkgs.emacs29}/bin/emacs";
               "bin/emacsclient".source = "${pkgs.emacs29}/bin/emacsclient";
+              # export some env vars for bash
+              ".nix-environment.bashrc" = {
+                text = ''
+                  export LOCALE_ARCHIVE=${pkgs.glibcLocales}/lib/locale/locale-archive
+                '';
+              };
             };
 
           }
