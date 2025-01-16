@@ -4,6 +4,22 @@ vers=24.11
 
 set -e -x
 
+mkdir -p "$HOME/.config/nix"
+rm -f "$HOME/.config/nix/nix.conf" "$HOME/.config/nix/nix.conf.bk"
+cat <<END >"$HOME/.config/nix/nix.conf"
+substituters = https://cache.nixos.org https://www.lpenz.org/nixpkgs-lpenz/cache https://nix-community.cachix.org https://lpenz.cachix.org
+trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= lpenz.org:jYDkTN/2qS96NxFnJpuWkNdVfNaWzaA5pmcg4MyXa2g= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= lpenz.cachix.org-1:ZRfvZ7o/oNiBcD9EtGKpzZSgJKG89uFZn/36zbCh1Oo=
+experimental-features = nix-command flakes
+allow-symlinked-store = true
+use-sqlite-wal = false
+cores = 1
+max-substitution-jobs = 1
+fsync-metadata = false
+END
+
+if ! sh <(curl -L https://nixos.org/nix/install) --no-daemon; then
+    mkdir -p mkdir "/nix/var/nix/profiles/per-user/$USER/"
+fi
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
 # shellcheck disable=SC1090,SC1091
 source "$HOME/.nix-profile/etc/profile.d/nix.sh"
@@ -18,7 +34,8 @@ else
     nix-channel --add "https://github.com/nix-community/home-manager/archive/release-${vers}.tar.gz" home-manager
 fi
 nix-channel --update -v
-export NIX_PATH=${NIX_PATH:+$NIX_PATH:}$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels
+export NIX_PATH=${NIX_PATH:+$NIX_PATH:}$HOME/.nix-defexpr/channels
 nix-shell '<home-manager>' -A install
+home-manager switch -v -b bk
 rm -f ~/.config/home-manager/home.nix ~/.config/nixpkgs/home.nix
-home-manager switch -v
+home-manager switch -v -b bk
