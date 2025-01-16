@@ -69,6 +69,7 @@
               pkgs.ripgrep
               pkgs.shellcheck
               pkgs.shfmt
+              pkgs.tmux
               pkgs.topgrade
             ];
 
@@ -207,6 +208,7 @@
                   exec "${pkgs.shfmt}/bin/shfmt" -i 4 "$@"
                 '';
               };
+              "bin/tmux".source = "${pkgs.tmux}/bin/tmux";
               "bin/topgrade".source = "${pkgs.topgrade}/bin/topgrade";
               # emacs
               "bin/emacs".source = "${pkgs.emacs29}/bin/emacs";
