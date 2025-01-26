@@ -1,0 +1,10 @@
+#!/bin/bash
+
+BASE="${PWD##*/}"
+
+set -e -x
+
+export CARGO_TARGET="$HOME/cargo-target/tarpaulin/$BASE"
+cargo tarpaulin -o Html --engine llvm
+realpath tarpaulin-report.html
+
