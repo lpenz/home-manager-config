@@ -17,13 +17,13 @@ jobs:
         uses: docker://lpenz/ghaction-version-gen:0.11.0
       - uses: cachix/install-nix-action@v20
         with:
-          nix_path: nixpkgs=channel:nixos-23.05
+          nix_path: nixpkgs=channel:nixos-24.11
           extra_nix_config: 'experimental-features = nix-command flakes'
       - run: nix flake check
       - name: Install home-manager
         run: |
           set -e -x; \
-          nix-channel --add "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz" home-manager; \
+          nix-channel --add "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz" home-manager; \
           nix-channel --update -v; \
           export NIX_PATH=${NIX_PATH:+$NIX_PATH:}$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels; \
           nix-shell '<home-manager>' -A install
