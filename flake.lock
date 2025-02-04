@@ -699,7 +699,7 @@
       },
       "locked": {
         "lastModified": 1738272260,
-        "narHash": "sha256-0JDSIGdC9k5h899oXbPpjeviQwC2kmHh8ir3vNIfsDs=",
+        "narHash": "sha256-9z+kgyCsSVqcgDjSZP4CW+3suO9vGgRuEiPdWbR1Pdo=",
         "owner": "lpenz",
         "repo": "ogle",
         "rev": "b58cf50a51cb41846ed85853c00d3375d1421ec2",
