@@ -78,7 +78,7 @@
 
             programs.emacs = {
               enable = true;
-              package = pkgs.emacs29;
+              package = pkgs.emacs;
             };
 
             # Fish
@@ -212,8 +212,8 @@
               "bin/tmux".source = "${pkgs.tmux}/bin/tmux";
               "bin/topgrade".source = "${pkgs.topgrade}/bin/topgrade";
               # emacs
-              "bin/emacs".source = "${pkgs.emacs29}/bin/emacs";
-              "bin/emacsclient".source = "${pkgs.emacs29}/bin/emacsclient";
+              "bin/emacs".source = "${pkgs.emacs}/bin/emacs";
+              "bin/emacsclient".source = "${pkgs.emacs}/bin/emacsclient";
               # export some env vars for bash
               ".nix-environment.bashrc" = {
                 text = ''
