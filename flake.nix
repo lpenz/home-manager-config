@@ -12,22 +12,19 @@
       url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    execpermfix.url = "github:lpenz/execpermfix";
-    ogle.url = "github:lpenz/ogle";
-    stdecor.url = "github:lpenz/stdecor";
   };
 
-  outputs = { self, nixpkgs, home-manager, cachix, nixvim, execpermfix, ogle, stdecor, ... }:
+  outputs = { self, nixpkgs, home-manager, cachix, nixvim, ... }:
     let
       system = "x86_64-linux";
       user = "lpenz";
       urxvtnotify = ./scripts/urxvt-notify;
-      pkgs = nixpkgs.legacyPackages.${system};
-      mypkgs = {
-        execpermfix = execpermfix.packages.${system}.default;
-        ogle = ogle.packages.${system}.default;
-        stdecor = stdecor.packages.${system}.default;
+      pkgs = import nixpkgs {
+        inherit system;
       };
+      execpermfix = (import ./mypkgs/execpermfix.nix) { inherit pkgs; };
+      ogle = (import ./mypkgs/ogle.nix) { inherit pkgs; };
+      stdecor = (import ./mypkgs/stdecor.nix) { inherit pkgs; };
       binwrap = name: {
         executable = true;
         text = ''
@@ -48,9 +45,9 @@
             home.homeDirectory = "/home/${user}";
 
             home.packages = [
-              mypkgs.execpermfix
-              mypkgs.ogle
-              mypkgs.stdecor
+              execpermfix
+              stdecor
+              ogle
 
               pkgs.autoflake
               pkgs.bat
@@ -136,9 +133,9 @@
               "bin/clang-scan-deps".source = "${pkgs.clang-tools}/bin/clang-scan-deps";
               "bin/clang-tidy".source = "${pkgs.clang-tools}/bin/clang-tidy";
               # mine
-              "bin/execpermfix".source = "${mypkgs.execpermfix}/bin/execpermfix";
-              "bin/ogle".source = "${mypkgs.ogle}/bin/ogle";
-              "bin/stdecor".source = "${mypkgs.stdecor}/bin/stdecor";
+              "bin/execpermfix".source = "${execpermfix}/bin/execpermfix";
+              "bin/ogle".source = "${ogle}/bin/ogle";
+              "bin/stdecor".source = "${stdecor}/bin/stdecor";
               # local scripts
               "bin/cleantop" = { executable = true; source = ./scripts/cleantop; };
               "bin/fish-tide-setup" = {
