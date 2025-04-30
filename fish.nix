@@ -93,6 +93,7 @@
   plugins = [
     { name = "sponge"; src = pkgs.fishPlugins.sponge.src; }
     { name = "tide"; src = pkgs.fishPlugins.tide.src; }
+    { name = "bang-bang"; src = pkgs.fishPlugins.bang-bang.src; }
     { name = "done"; src = pkgs.fishPlugins.done.src; }
   ];
 }
