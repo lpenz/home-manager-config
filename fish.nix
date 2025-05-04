@@ -82,8 +82,8 @@
         end
     end
     bind \em fish-repeat-last-word
-    if test -e "$HOME/.fishrc.local"
-        source "$HOME/.fishrc.local"
+    if test -e "$HOME/.fishrc-local.fish"
+        source "$HOME/.fishrc-local.fish"
     end
     function fish-pager-vim
         fish_commandline_append ' 2>&1 | vi -'
