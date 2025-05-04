@@ -33,6 +33,18 @@
     }
     {
       mode = "n";
+      key = "<F4>";
+      action = "<cmd>cn<CR>";
+      options = { desc = "Go to next error"; silent = true; };
+    }
+    {
+      mode = "n";
+      key = "<F9>";
+      action = "<cmd>cw<CR>";
+      options = { desc = "Open compilation window"; silent = true; };
+    }
+    {
+      mode = "n";
       key = "<F10>";
       action = "<cmd>make<CR>";
       options = { desc = "Compile project."; silent = true; };
@@ -62,7 +74,7 @@
     };
   };
   plugins.web-devicons = {
-      enable = true;
+    enable = true;
   };
   # plugins.treesitter = {
   #   enable = true;
