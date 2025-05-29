@@ -29,7 +29,7 @@
     bind \e\x7f backward-kill-bigword
     bind \eb backward-bigword
     bind \cx\ce edit_command_buffer
-    bind -k f10 fish-omnibuild
+    bind f10 fish-omnibuild
     bind \ew fish-append-cwd
     bind \e1 fish-sudo-line
     bind \e! fish-sudo-line
