@@ -4,6 +4,8 @@
   interactiveShellInit = ''
     # Commands to run in interactive sessions can go here
     set fish_greeting
+    # Install fundle
+    if not functions -q fundle; eval (curl -sfL https://git.io/fundle-install); end
     fish_config theme choose 'fish default'
     fish_add_path "$HOME/bin"
     set -gx LOCALE_ARCHIVE_2_27 "${pkgs.glibcLocales}/lib/locale/locale-archive"
