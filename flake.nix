@@ -23,8 +23,6 @@
         inherit system;
       };
       execpermfix = (import ./mypkgs/execpermfix.nix) { inherit pkgs; };
-      ogle = (import ./mypkgs/ogle.nix) { inherit pkgs; };
-      stdecor = (import ./mypkgs/stdecor.nix) { inherit pkgs; };
       binwrap = name: {
         executable = true;
         text = ''
@@ -46,9 +44,6 @@
 
             home.packages = [
               execpermfix
-              stdecor
-              ogle
-
               pkgs.autoflake
               pkgs.bat
               pkgs.black
@@ -134,8 +129,6 @@
               "bin/clang-tidy".source = "${pkgs.clang-tools}/bin/clang-tidy";
               # mine
               "bin/execpermfix".source = "${execpermfix}/bin/execpermfix";
-              "bin/ogle".source = "${ogle}/bin/ogle";
-              "bin/stdecor".source = "${stdecor}/bin/stdecor";
               # local scripts
               "bin/cleantop" = { executable = true; source = ./scripts/cleantop; };
               "bin/fish-tide-setup" = {
