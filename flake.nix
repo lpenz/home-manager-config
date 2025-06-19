@@ -201,6 +201,7 @@
               };
               "bin/tmux".source = "${pkgs.tmux}/bin/tmux";
               "bin/topgrade".source = "${pkgs.topgrade}/bin/topgrade";
+              "bin/yamllint".source = "${pkgs.yamllint}/bin/yamllint";
               # emacs
               "bin/emacs".source = "${pkgs.emacs}/bin/emacs";
               "bin/emacsclient".source = "${pkgs.emacs}/bin/emacsclient";
