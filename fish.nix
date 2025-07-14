@@ -23,6 +23,7 @@
     set -U __done_min_cmd_duration 3000
     set -U __done_notification_command "${urxvtnotify} \$title \$message"
     set -U __done_allow_nongraphical 1
+    set -U sponge_purge_only_on_exit true
     set --prepend fish_function_path ${pkgs.fzf}/share/fish/vendor_functions.d
     fzf_key_bindings
     direnv hook fish | source
