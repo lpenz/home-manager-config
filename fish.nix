@@ -37,12 +37,20 @@
     bind \e1 fish-sudo-line
     bind \e! fish-sudo-line
     bind \em fish-repeat-last-word
+    bind \ei fish-pager-vim
+    bind \eh fish-help-this
     if test -e "$HOME/.fishrc-local.fish"
         source "$HOME/.fishrc-local.fish"
     end
-    bind \ei fish-pager-vim
   '';
   functions = {
+    fish-help-this.body = ''
+      set cmd (commandline -b)
+      if test -z "$cmd"
+        return
+      end
+      eval "$cmd --help 2>&1 | vi -"
+    '';
     fish-push-line.body = ''
       commandline -f kill-whole-line
       function restore_line --on-event fish_prompt
