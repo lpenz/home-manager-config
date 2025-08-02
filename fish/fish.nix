@@ -33,7 +33,7 @@
     bind \eb backward-bigword
     bind \cx\ce edit_command_buffer
     bind f10 fish-omnibuild
-    bind \ew fish-append-cwd
+    bind \ew fish-full-path
     bind \e1 fish-sudo-line
     bind \e! fish-sudo-line
     bind \em fish-repeat-last-word
@@ -58,20 +58,18 @@
           functions -e restore_line
       end
     '';
-    fish-omnibuild = ''
+    fish-omnibuild.body = ''
       commandline -r omnibuild
       commandline -f execute
     '';
-    fish-append-cwd = ''
-      commandline -i {$PWD}/
-    '';
-    fish-sudo-line = ''
+    fish-full-path.body = builtins.readFile ./fish-full-path.fish;
+    fish-sudo-line.body = ''
       fish_commandline_prepend sudo
     '';
-    fish-pager-vim = ''
+    fish-pager-vim.body = ''
       fish_commandline_append ' 2>&1 | vi -'
     '';
-    fish-repeat-last-word = ''
+    fish-repeat-last-word.body = ''
       set -l cmdline (commandline)
       set -l cursor_pos (commandline -C)
 

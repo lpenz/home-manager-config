@@ -74,7 +74,7 @@
             };
 
             # Fish
-            programs.fish = (import ./fish.nix) {
+            programs.fish = (import ./fish/fish.nix) {
               inherit pkgs urxvtnotify;
             };
 
