@@ -7,4 +7,5 @@
   cores = 1;
   max-substitution-jobs = 1;
   fsync-metadata = false;
+  extra-ignored-acls = "system.nfs4_dacl";
 }
