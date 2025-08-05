@@ -39,3 +39,9 @@ nix-shell '<home-manager>' -A install
 home-manager switch -v -b bk
 rm -f ~/.config/home-manager/home.nix ~/.config/nixpkgs/home.nix
 home-manager switch -v -b bk
+
+: Remove packages managed by nix-env and channels - we dont need these when using home-manager
+nix-channel --remove nixpkgs
+nix-channel --remove home-manager
+nix-env -e nix
+
