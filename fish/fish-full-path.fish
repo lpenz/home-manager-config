@@ -2,14 +2,21 @@
 set cmd (commandline)
 set pos (commandline -C)
 set diff 0
-# Move cursor left until it lands on a non-space character
-while test $pos -gt 0
-    set char (string sub -s $pos -l 1 -- $cmd)
-    if test "$char" != ' '
-        break
+if test $pos -eq 0
+    # Move 1 right if we are at the start of the line so that
+    # we get 1 char token and add the cwd
+    set pos 1
+    set diff -1
+else
+    # Move cursor left until it lands on a non-space character
+    while test $pos -gt 0
+        set char (string sub -s $pos -l 1 -- $cmd)
+        if test "$char" != ' '
+            break
+        end
+        set pos (math $pos - 1)
+        set diff (math $diff + 1)
     end
-    set pos (math $pos - 1)
-    set diff (math $diff + 1)
 end
 set before (string sub -l $pos -- $cmd)
 set after (string sub -s (math $pos + 1) -- $cmd)
