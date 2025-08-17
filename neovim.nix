@@ -6,6 +6,7 @@
   vimdiffAlias = true;
   globals = {
     mapleader = " ";
+    DirDiffExcludes = ".git";
   };
   opts = {
     autowriteall = true;
