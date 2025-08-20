@@ -57,8 +57,10 @@
               pkgs.htop
               pkgs.nixpkgs-fmt
               pkgs.nnn
+              pkgs.pyright
               pkgs.renameutils
               pkgs.ripgrep
+              pkgs.ruff
               pkgs.shellcheck
               pkgs.shfmt
               pkgs.tmux
@@ -184,6 +186,8 @@
                   exec "${pkgs.nnn}/bin/nnn" "$@"
                 '';
               };
+              "bin/pyright".source = "${pkgs.ripgrep}/bin/pyright";
+              "bin/pyright-langserver".source = "${pkgs.ripgrep}/bin/pyright-langserver";
               "bin/nvim" = binwrap "nvim";
               "bin/vim" = binwrap "vim";
               "bin/vi" = binwrap "vi";
@@ -191,6 +195,7 @@
               "bin/qmv".source = "${pkgs.renameutils}/bin/qmv";
               "bin/qcp".source = "${pkgs.renameutils}/bin/qcp";
               "bin/rg".source = "${pkgs.ripgrep}/bin/rg";
+              "bin/ruff".source = "${pkgs.ripgrep}/bin/ruff";
               "bin/shellcheck".source = "${pkgs.shellcheck}/bin/shellcheck";
               "bin/shfmt" = {
                 executable = true;
