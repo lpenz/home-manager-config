@@ -121,7 +121,6 @@
               "bin/clang-move".source = "${pkgs.clang-tools}/bin/clang-move";
               "bin/clang-nvlink-wrapper".source = "${pkgs.clang-tools}/bin/clang-nvlink-wrapper";
               "bin/clang-offload-bundler".source = "${pkgs.clang-tools}/bin/clang-offload-bundler";
-              "bin/clang-offload-wrapper".source = "${pkgs.clang-tools}/bin/clang-offload-wrapper";
               "bin/clang-query".source = "${pkgs.clang-tools}/bin/clang-query";
               "bin/clang-refactor".source = "${pkgs.clang-tools}/bin/clang-refactor";
               "bin/clang-rename".source = "${pkgs.clang-tools}/bin/clang-rename";
@@ -186,8 +185,8 @@
                   exec "${pkgs.nnn}/bin/nnn" "$@"
                 '';
               };
-              "bin/pyright".source = "${pkgs.ripgrep}/bin/pyright";
-              "bin/pyright-langserver".source = "${pkgs.ripgrep}/bin/pyright-langserver";
+              "bin/pyright".source = "${pkgs.pyright}/bin/pyright";
+              "bin/pyright-langserver".source = "${pkgs.pyright}/bin/pyright-langserver";
               "bin/nvim" = binwrap "nvim";
               "bin/vim" = binwrap "vim";
               "bin/vi" = binwrap "vi";
@@ -195,7 +194,7 @@
               "bin/qmv".source = "${pkgs.renameutils}/bin/qmv";
               "bin/qcp".source = "${pkgs.renameutils}/bin/qcp";
               "bin/rg".source = "${pkgs.ripgrep}/bin/rg";
-              "bin/ruff".source = "${pkgs.ripgrep}/bin/ruff";
+              "bin/ruff".source = "${pkgs.ruff}/bin/ruff";
               "bin/shellcheck".source = "${pkgs.shellcheck}/bin/shellcheck";
               "bin/shfmt" = {
                 executable = true;
