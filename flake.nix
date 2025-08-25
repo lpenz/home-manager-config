@@ -42,6 +42,7 @@
             home.username = "${user}";
             home.homeDirectory = "/home/${user}";
 
+            # This defines what gets linked in ~/.nix-profile/...
             home.packages = [ ];
 
             nix.package = pkgs.nix;
@@ -145,13 +146,6 @@
               "bin/fd".source = "${pkgs.fd}/bin/fd";
               "bin/fish".source = "${pkgs.fish}/bin/fish";
               "bin/fzf".source = "${pkgs.fzf}/bin/fzf";
-              "bin/global".source = "${pkgs.global}/bin/global";
-              "bin/globash".source = "${pkgs.global}/bin/globash";
-              "bin/gozilla".source = "${pkgs.global}/bin/gozilla";
-              "bin/gtags-cscope".source = "${pkgs.global}/bin/gtags-cscope";
-              "bin/gtags".source = "${pkgs.global}/bin/gtags";
-              "bin/htags-server".source = "${pkgs.global}/bin/htags-server";
-              "bin/htags".source = "${pkgs.global}/bin/htags";
               "bin/htop".source = "${pkgs.htop}/bin/htop";
               "bin/nixpkgs-fmt".source = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
               "bin/nnn" = {
