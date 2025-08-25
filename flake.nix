@@ -42,30 +42,7 @@
             home.username = "${user}";
             home.homeDirectory = "/home/${user}";
 
-            home.packages = [
-              execpermfix
-              pkgs.autoflake
-              pkgs.bat
-              pkgs.black
-              pkgs.cachix
-              pkgs.clang-tools
-              pkgs.direnv
-              pkgs.fd
-              pkgs.fzf
-              pkgs.glibcLocales
-              pkgs.global
-              pkgs.htop
-              pkgs.nixpkgs-fmt
-              pkgs.nnn
-              pkgs.pyright
-              pkgs.renameutils
-              pkgs.ripgrep
-              pkgs.ruff
-              pkgs.shellcheck
-              pkgs.shfmt
-              pkgs.tmux
-              pkgs.topgrade
-            ];
+            home.packages = [ ];
 
             nix.package = pkgs.nix;
             nix.settings = (import ./nix.conf.nix);
