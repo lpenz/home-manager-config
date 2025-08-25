@@ -176,6 +176,14 @@
               };
               "bin/tmux".source = "${pkgs.tmux}/bin/tmux";
               "bin/topgrade".source = "${pkgs.topgrade}/bin/topgrade";
+              "bin/yamlfix" = {
+                executable = true;
+                text = ''
+                  #!/bin/bash
+                  export YAMLFIX_WHITELINES="1"
+                  exec "${pkgs.yamlfix}/bin/yamlfix" "$@"
+                '';
+              };
               "bin/yamllint".source = "${pkgs.yamllint}/bin/yamllint";
               # emacs
               "bin/emacs".source = "${pkgs.emacs}/bin/emacs";
