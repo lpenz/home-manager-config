@@ -140,6 +140,7 @@
               # regular packages
               "bin/autoflake".source = "${pkgs.autoflake}/bin/autoflake";
               "bin/bat".source = "${pkgs.bat}/bin/bat";
+              "bin/bindfs".source = "${pkgs.bindfs}/bin/bindfs";
               "bin/black".source = "${pkgs.black}/bin/black";
               "bin/cachix".source = "${pkgs.cachix}/bin/cachix";
               "bin/direnv".source = "${pkgs.direnv}/bin/direnv";
