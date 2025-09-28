@@ -139,6 +139,7 @@
               };
               # regular packages
               "bin/autoflake".source = "${pkgs.autoflake}/bin/autoflake";
+              "bin/bash-language-server".source = "${pkgs.bash-language-server}/bin/bash-language-server";
               "bin/bat".source = "${pkgs.bat}/bin/bat";
               "bin/bindfs".source = "${pkgs.bindfs}/bin/bindfs";
               "bin/black".source = "${pkgs.black}/bin/black";
