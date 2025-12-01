@@ -2,14 +2,14 @@
   description = "lpenz's home-manager config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     cachix.url = "github:cachix/cachix";
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-25.05";
+      url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -35,10 +35,10 @@
       homeConfigurations.lpenz = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          nixvim.homeManagerModules.nixvim
+          nixvim.homeModules.nixvim
           {
             programs.home-manager.enable = true;
-            home.stateVersion = "25.05";
+            home.stateVersion = "25.11";
             home.username = "${user}";
             home.homeDirectory = "/home/${user}";
 
@@ -164,6 +164,7 @@
               "bin/vim" = binwrap "vim";
               "bin/vi" = binwrap "vi";
               "bin/vimdiff" = binwrap "vimdiff";
+              "bin/prettier".source = "${pkgs.prettier}/bin/prettier";
               "bin/qmv".source = "${pkgs.renameutils}/bin/qmv";
               "bin/qcp".source = "${pkgs.renameutils}/bin/qcp";
               "bin/rg".source = "${pkgs.ripgrep}/bin/rg";
