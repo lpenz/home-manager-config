@@ -76,5 +76,6 @@
     { name = "tide"; src = pkgs.fishPlugins.tide.src; }
     { name = "bang-bang"; src = pkgs.fishPlugins.bang-bang.src; }
     { name = "done"; src = pkgs.fishPlugins.done.src; }
+    { name = "nvm"; src = pkgs.fishPlugins.nvm.src; }
   ];
 }
