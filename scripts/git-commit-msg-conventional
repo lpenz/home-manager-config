@@ -1,0 +1,21 @@
+#!/bin/sh
+
+COMMIT_MSG_FILE=$1
+COMMIT_MSG=$(head -n1 "$COMMIT_MSG_FILE")
+
+PATTERN='^(feat|fix|docs|style|refactor|perf|test|chore|build|ci|revert)(\([a-z0-9_-]+\))?: .+'
+
+if ! echo "$COMMIT_MSG" | grep -Eq "$PATTERN"; then
+    cat <<END
+Invalid commit message.
+
+Commit messages must follow Conventional Commits:
+
+  <type>(optional-scope): <description>
+
+Allowed types:
+  feat, fix, docs, style, refactor, perf, test, chore, build, ci, revert
+
+END
+    exit 1
+fi

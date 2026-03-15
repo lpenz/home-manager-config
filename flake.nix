@@ -110,6 +110,7 @@
               "bin/execpermfix".source = "${execpermfix}/bin/execpermfix";
               # local scripts
               "bin/cleantop" = { executable = true; source = ./scripts/cleantop; };
+              "bin/git-commit-msg-conventional" = { executable = true; source = ./scripts/git-commit-msg-conventional; };
               "bin/fish-tide-setup" = {
                 executable = true;
                 text = ''
