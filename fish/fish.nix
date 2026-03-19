@@ -27,7 +27,7 @@
     set --prepend fish_function_path ${pkgs.fzf}/share/fish/vendor_functions.d
     fzf_key_bindings
     direnv hook fish | source
-    bind \eq fish-push-line
+    bind \eq fish-comment-toggle
     bind \ed kill-bigword
     bind \e\x7f backward-kill-bigword
     bind \eb backward-bigword
@@ -70,6 +70,7 @@
       fish_commandline_append ' 2>&1 | vi -'
     '';
     fish-repeat-last-word.body = builtins.readFile ./fish-repeat-last-word.fish;
+    fish-comment-toggle.body = builtins.readFile ./fish-comment-toggle.fish;
   };
   plugins = [
     { name = "sponge"; src = pkgs.fishPlugins.sponge.src; }
