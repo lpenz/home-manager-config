@@ -9,6 +9,8 @@ jobs:
       - uses: docker://lpenz/omnilint:0.5
   nix:
     runs-on: ubuntu-latest
+    env:
+      USER: lpenz
     steps:
       - uses: actions/checkout@v3.1.0
         with:
@@ -36,10 +38,12 @@ jobs:
           cd /home/runner/.config; \
           rm -rf home-manager nixpkgs; \
           ln -s "$dir" home-manager; \
-      - run: home-manager switch -b backup
-        env:
-          USER: lpenz
-          HOME: /home/lpenz
+      - name: home-manager initial run that breaks the database
+        run: home-manager switch -b backup || true
+      - name: Remove database after pragma change
+        run: rm -rf $HOME/.cache
+      - name: home-manager full run
+        run: home-manager switch -b backup
       - name: Set up repository as home-manager
         run: |
           set -e -x; \
