@@ -146,6 +146,7 @@
               "bin/black".source = "${pkgs.black}/bin/black";
               "bin/cachix".source = "${pkgs.cachix}/bin/cachix";
               "bin/direnv".source = "${pkgs.direnv}/bin/direnv";
+              "bin/eslint".source = "${pkgs.eslint}/bin/eslint";
               "bin/fd".source = "${pkgs.fd}/bin/fd";
               "bin/fish".source = "${pkgs.fish}/bin/fish";
               "bin/fzf".source = "${pkgs.fzf}/bin/fzf";
