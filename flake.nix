@@ -151,6 +151,7 @@
               "bin/fish".source = "${pkgs.fish}/bin/fish";
               "bin/fzf".source = "${pkgs.fzf}/bin/fzf";
               "bin/htop".source = "${pkgs.htop}/bin/htop";
+              "bin/tidy".source = "${pkgs.html-tidy}/bin/tidy";
               "bin/nixpkgs-fmt".source = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
               "bin/nnn" = {
                 executable = true;
