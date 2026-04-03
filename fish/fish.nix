@@ -39,6 +39,12 @@
     bind \em fish-repeat-last-word
     bind \ei fish-pager-vim
     bind \eh fish-help-this
+    # Update the symlink for the SSH Auth Socket
+    if set -q SSH_AUTH_SOCK; and test "$SSH_AUTH_SOCK" != "$HOME/.ssh/ssh_auth_sock"
+        ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/ssh_auth_sock"
+    end
+    # Always point Fish to the symlink
+    set -gx SSH_AUTH_SOCK "$HOME/.ssh/ssh_auth_sock"
     if test -e "$HOME/.fishrc-local.fish"
         source "$HOME/.fishrc-local.fish"
     end
