@@ -8,7 +8,11 @@ if test -n "$line"
         # Calculate the new cursor position
         set removed (string replace -r '^([ #]+).*' '\1' -- $line)
         set removed_len (string length $removed)
-        commandline --cursor (math $cursor - $removed_len)
+        if test $cursor -gt $removed_len
+            commandline --cursor (math $cursor - $removed_len)
+        else
+            commandline --cursor 0
+        end
     else
         # Add "# " at the start
         set newline "# $line"
