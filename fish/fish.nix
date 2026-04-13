@@ -27,6 +27,7 @@
     set --prepend fish_function_path ${pkgs.fzf}/share/fish/vendor_functions.d
     fzf_key_bindings
     direnv hook fish | source
+    bind \er history-pager
     bind \eq fish-comment-toggle
     bind \ed kill-bigword
     bind \e\x7f backward-kill-bigword
