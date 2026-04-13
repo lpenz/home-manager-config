@@ -109,6 +109,10 @@
               # mine
               "bin/execpermfix".source = "${execpermfix}/bin/execpermfix";
               # local scripts
+              "bin/cargo-run-console.sh" = {
+                executable = true;
+                source = ./scripts/cargo-run-console.sh;
+              };
               "bin/cleantop" = { executable = true; source = ./scripts/cleantop; };
               "bin/git-commit-msg-conventional" = { executable = true; source = ./scripts/git-commit-msg-conventional; };
               "bin/fish-tide-setup" = {
