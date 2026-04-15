@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e -x
+
+exec tmux new-session -c "$PWD" 'emacs -nw' \; new-window -c "$PWD" \; select-window -t 0
