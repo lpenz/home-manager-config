@@ -23,13 +23,6 @@
         inherit system;
       };
       execpermfix = (import ./mypkgs/execpermfix.nix) { inherit pkgs; };
-      binwrap = pkg: name: {
-        executable = true;
-        text = ''
-          #!/bin/bash
-          exec "${pkg}/bin/${name}" "$@"
-        '';
-      };
     in
     {
       homeConfigurations.lpenz = home-manager.lib.homeManagerConfiguration {
@@ -168,9 +161,9 @@
               };
               "bin/pyright".source = "${pkgs.pyright}/bin/pyright";
               "bin/pyright-langserver".source = "${pkgs.pyright}/bin/pyright-langserver";
-              "bin/nvim" = binwrap config.programs.nixvim.build.package "nvim";
-              "bin/vim" = binwrap config.programs.nixvim.build.package "vim";
-              "bin/vi" = binwrap config.programs.nixvim.build.package "vi";
+              "bin/nvim".source = "${config.programs.nixvim.build.package}/bin/nvim";
+              "bin/vim".source = "${config.programs.nixvim.build.package}/bin/vim";
+              "bin/vi".source = "${config.programs.nixvim.build.package}/bin/vi";
               "bin/vimdiff" = {
                 executable = true;
                 text = ''
