@@ -23,11 +23,11 @@
         inherit system;
       };
       execpermfix = (import ./mypkgs/execpermfix.nix) { inherit pkgs; };
-      binwrap = name: {
+      binwrap = pkg: name: {
         executable = true;
         text = ''
           #!/bin/bash
-          exec "$HOME/.nix-profile/bin/${name}" "$@"
+          exec "${pkg}/bin/${name}" "$@"
         '';
       };
     in
@@ -36,7 +36,7 @@
         inherit pkgs;
         modules = [
           nixvim.homeModules.nixvim
-          {
+          ({ config, ... }: {
             programs.home-manager.enable = true;
             home.stateVersion = "25.11";
             home.username = "${user}";
@@ -168,10 +168,10 @@
               };
               "bin/pyright".source = "${pkgs.pyright}/bin/pyright";
               "bin/pyright-langserver".source = "${pkgs.pyright}/bin/pyright-langserver";
-              "bin/nvim" = binwrap "nvim";
-              "bin/vim" = binwrap "vim";
-              "bin/vi" = binwrap "vi";
-              "bin/vimdiff" = binwrap "vimdiff";
+              "bin/nvim" = binwrap config.programs.nixvim.build.package "nvim";
+              "bin/vim" = binwrap config.programs.nixvim.build.package "vim";
+              "bin/vi" = binwrap config.programs.nixvim.build.package "vi";
+              "bin/vimdiff" = binwrap config.programs.nixvim.build.package "vimdiff";
               "bin/prettier".source = "${pkgs.prettier}/bin/prettier";
               "bin/qmv".source = "${pkgs.renameutils}/bin/qmv";
               "bin/qcp".source = "${pkgs.renameutils}/bin/qcp";
@@ -207,7 +207,7 @@
               };
             };
 
-          }
+          })
         ];
       };
     };
