@@ -171,7 +171,13 @@
               "bin/nvim" = binwrap config.programs.nixvim.build.package "nvim";
               "bin/vim" = binwrap config.programs.nixvim.build.package "vim";
               "bin/vi" = binwrap config.programs.nixvim.build.package "vi";
-              "bin/vimdiff" = binwrap config.programs.nixvim.build.package "vimdiff";
+              "bin/vimdiff" = {
+                executable = true;
+                text = ''
+                  #!/bin/bash
+                  exec "${config.programs.nixvim.build.package}/bin/nvim" -d "$@"
+                '';
+              };
               "bin/prettier".source = "${pkgs.prettier}/bin/prettier";
               "bin/qmv".source = "${pkgs.renameutils}/bin/qmv";
               "bin/qcp".source = "${pkgs.renameutils}/bin/qcp";
