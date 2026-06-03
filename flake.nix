@@ -21,6 +21,7 @@
       urxvtnotify = ./scripts/urxvt-notify;
       pkgs = import nixpkgs {
         inherit system;
+        config.allowUnfree = true;
       };
       execpermfix = (import ./mypkgs/execpermfix.nix) { inherit pkgs; };
     in
