@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e -x
+
+/proc/"$(pgrep "tmux: server" | head -n 1)"/exe "$@"

@@ -131,6 +131,7 @@
               "bin/ssh-tmux-nohostkey" = { executable = true; source = ./scripts/ssh-tmux-nohostkey; };
               "bin/tarpaulin" = { executable = true; source = ./scripts/tarpaulin; };
               "bin/tmacs" = { executable = true; source = ./scripts/tmacs; };
+              "bin/tmux-old" = { executable = true; source = ./scripts/tmux-old; };
               "bin/tmux-pstree" = { executable = true; source = ./scripts/tmux-pstree; };
               "bin/urxvt-notify" = { executable = true; source = "${urxvtnotify}"; };
               "bin/headt" = {
