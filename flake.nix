@@ -52,6 +52,12 @@
               inherit pkgs urxvtnotify;
             };
 
+            # fzf and its Fish integration
+            programs.fzf = {
+              enable = true;
+              enableFishIntegration = true;
+            };
+
             # neovim
             programs.nixvim = (import ./neovim.nix) {
               inherit pkgs;
