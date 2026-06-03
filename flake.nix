@@ -2,14 +2,14 @@
   description = "lpenz's home-manager config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     cachix.url = "github:cachix/cachix";
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-25.11";
+      url = "github:nix-community/nixvim/nixos-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -32,7 +32,7 @@
           nixvim.homeModules.nixvim
           ({ config, ... }: {
             programs.home-manager.enable = true;
-            home.stateVersion = "25.11";
+            home.stateVersion = "26.05";
             home.username = "${user}";
             home.homeDirectory = "/home/${user}";
 
