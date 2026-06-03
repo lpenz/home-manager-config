@@ -8,6 +8,8 @@
     if not functions -q fundle; eval (curl -sfL https://git.io/fundle-install); end
     fish_config theme choose 'fish default'
     fish_add_path "$HOME/bin"
+    # Fix tide falling through to vi-mode: (remove once tide is fixed)
+    set -gx fish_key_bindings fish_default_key_bindings
     set -gx LOCALE_ARCHIVE_2_27 "${pkgs.glibcLocales}/lib/locale/locale-archive"
     set -gx EDITOR vim
     set -gx VISUAL vim
