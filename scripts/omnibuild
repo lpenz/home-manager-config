@@ -21,6 +21,7 @@ fi
 if [ -e Cargo.toml ]; then
     cargo clippy
     cargo test "$@"
+    cargo fmt --check
     done=$((done + 1))
 fi
 
