@@ -132,6 +132,7 @@
                        --transient=No
                 '';
               };
+              "bin/omnibuild" = { executable = true; source = ./scripts/omnibuild; };
               "bin/ssh-tmux" = { executable = true; source = ./scripts/ssh-tmux; };
               "bin/ssh-nohostkey" = { executable = true; source = ./scripts/ssh-nohostkey; };
               "bin/ssh-tmux-nohostkey" = { executable = true; source = ./scripts/ssh-tmux-nohostkey; };
