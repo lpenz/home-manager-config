@@ -19,6 +19,7 @@ if test -n "$line"
         commandline --replace $newline
         # To keep the cursor position, just move it left by 2
         commandline --cursor (math $cursor + 2)
+        commandline -f execute
     end
 
 end
