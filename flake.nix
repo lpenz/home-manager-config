@@ -16,23 +16,29 @@
 
   outputs = { self, nixpkgs, home-manager, cachix, nixvim, ... }:
     let
-      system = "x86_64-linux";
       user = "lpenz";
       urxvtnotify = ./scripts/urxvt-notify;
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-      execpermfix = (import ./mypkgs/execpermfix.nix) { inherit pkgs; };
+      mkHomeConfig = system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+          execpermfix = (import ./mypkgs/execpermfix.nix) { inherit pkgs; };
+        in
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit user urxvtnotify execpermfix; };
+          modules = [
+            nixvim.homeModules.nixvim
+            ./home.nix
+          ];
+        };
     in
     {
-      homeConfigurations.lpenz = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = { inherit user urxvtnotify execpermfix; };
-        modules = [
-          nixvim.homeModules.nixvim
-          ./home.nix
-        ];
+      homeConfigurations = {
+        "lpenz@htpc" = mkHomeConfig "aarch64-linux";
+        "lpenz" = mkHomeConfig "x86_64-linux";
       };
     };
 }
