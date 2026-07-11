@@ -1,4 +1,4 @@
-{ config, pkgs, user, urxvtnotify, execpermfix, ... }:
+{ config, pkgs, user, urxvtnotify, execpermfix, fundle, ... }:
 
 {
   programs.home-manager.enable = true;
@@ -19,7 +19,7 @@
 
   # Fish
   programs.fish = (import ./fish/fish.nix) {
-    inherit pkgs urxvtnotify;
+    inherit pkgs urxvtnotify fundle;
   };
 
   # fzf and its Fish integration

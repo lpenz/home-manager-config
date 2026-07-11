@@ -1,11 +1,9 @@
-{ pkgs, urxvtnotify }:
+{ pkgs, urxvtnotify, fundle }:
 {
   enable = true;
   interactiveShellInit = ''
     # Commands to run in interactive sessions can go here
     set fish_greeting
-    # Install fundle
-    if not functions -q fundle; eval (curl -sfL https://git.io/fundle-install); end
     fish_config theme choose 'fish default'
     fish_add_path "$HOME/.local/bin"
     fish_add_path "$HOME/bin"
@@ -86,5 +84,6 @@
     { name = "bang-bang"; src = pkgs.fishPlugins.bang-bang.src; }
     { name = "done"; src = pkgs.fishPlugins.done.src; }
     { name = "nvm"; src = pkgs.fishPlugins.nvm.src; }
+    { name = "fundle"; src = fundle; }
   ];
 }

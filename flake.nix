@@ -25,10 +25,11 @@
             config.allowUnfree = true;
           };
           execpermfix = (import ./mypkgs/execpermfix.nix) { inherit pkgs; };
+          fundle = (import ./mypkgs/fundle.nix) { inherit pkgs; };
         in
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit user urxvtnotify execpermfix; };
+          extraSpecialArgs = { inherit user urxvtnotify execpermfix fundle; };
           modules = [
             nixvim.homeModules.nixvim
             ./home.nix
