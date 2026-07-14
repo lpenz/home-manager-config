@@ -9,6 +9,8 @@
   # This defines what gets linked in ~/.nix-profile/...
   home.packages = [ ];
 
+  xdg.configFile."nixpkgs/config.nix".text = "{ allowUnfree = true; }\n";
+
   nix.package = pkgs.nix;
   nix.settings = (import ./nix.conf.nix);
 
