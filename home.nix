@@ -86,7 +86,6 @@
       source = ./scripts/cargo-run-console.sh;
     };
     "bin/cleantop" = { executable = true; source = ./scripts/cleantop; };
-    "bin/git-commit-msg-conventional" = { executable = true; source = ./scripts/git-commit-msg-conventional; };
     "bin/fish-tide-setup" = {
       executable = true;
       text = ''
@@ -104,6 +103,8 @@
              --transient=No
       '';
     };
+    "bin/git-commit-msg-conventional" = { executable = true; source = ./scripts/git-commit-msg-conventional; };
+    "bin/id-prefix-only" = { executable = true; source = ./scripts/id-prefix-only; };
     "bin/omnibuild" = { executable = true; source = ./scripts/omnibuild; };
     "bin/ssh-tmux" = { executable = true; source = ./scripts/ssh-tmux; };
     "bin/ssh-nohostkey" = { executable = true; source = ./scripts/ssh-nohostkey; };
