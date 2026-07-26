@@ -103,6 +103,7 @@
              --transient=No
       '';
     };
+    "bin/gh-run-and-watch" = { executable = true; source = ./scripts/gh-run-and-watch; };
     "bin/git-commit-msg-conventional" = { executable = true; source = ./scripts/git-commit-msg-conventional; };
     "bin/id-prefix-only" = { executable = true; source = ./scripts/id-prefix-only; };
     "bin/omnibuild" = { executable = true; source = ./scripts/omnibuild; };
