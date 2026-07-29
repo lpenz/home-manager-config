@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Trigger a GitHub Actions CI workflow and watch its progress."""
 
+import argparse
 import json
 import subprocess
 import time
@@ -14,13 +15,21 @@ def run(cmd: list[str], check: bool = True) -> str:
 
 def get_latest_run_id(workflow: str, branch: str) -> int | None:
     """Return the databaseId of the latest run, or None."""
-    output = run([
-        "gh", "run", "list",
-        "--workflow", workflow,
-        "--branch", branch,
-        "--limit", "1",
-        "--json", "databaseId",
-    ])
+    output = run(
+        [
+            "gh",
+            "run",
+            "list",
+            "--workflow",
+            workflow,
+            "--branch",
+            branch,
+            "--limit",
+            "1",
+            "--json",
+            "databaseId",
+        ]
+    )
     runs = json.loads(output)
     if runs:
         return runs[0]["databaseId"]
@@ -29,16 +38,34 @@ def get_latest_run_id(workflow: str, branch: str) -> int | None:
 
 def main() -> None:
     """Trigger the CI workflow and watch the new run."""
-    branch = run(["git", "rev-parse", "--abbrev-ref", "HEAD"])
+    parser = argparse.ArgumentParser(
+        description="Trigger a CI workflow and watch its progress."
+    )
+    parser.add_argument(
+        "-b",
+        "--branch",
+        default=None,
+        help="Branch to run the workflow on" " (default: current branch)",
+    )
+    parser.add_argument(
+        "-w",
+        "--workflow",
+        default="ci.yml",
+        help="Workflow file to run (default: ci.yml)",
+    )
+    args = parser.parse_args()
+
+    branch = args.branch or run(["git", "rev-parse", "--abbrev-ref", "HEAD"])
+    workflow = args.workflow
     print(f"Triggering CI workflow on branch: {branch}")
 
-    old_run_id = get_latest_run_id("ci.yml", branch)
-    run(["gh", "workflow", "run", "ci.yml", "--ref", branch])
+    old_run_id = get_latest_run_id(workflow, branch)
+    run(["gh", "workflow", "run", workflow, "--ref", branch])
 
     print("Waiting for run to appear...")
     run_id = old_run_id
     for _ in range(20):
-        run_id = get_latest_run_id("ci.yml", branch)
+        run_id = get_latest_run_id(workflow, branch)
         if run_id != old_run_id:
             break
         time.sleep(0.5)
