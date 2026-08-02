@@ -1,0 +1,141 @@
+#!/usr/bin/env python3
+"""Show the logs of a failed GitHub Actions job.
+
+With a job id, print that job's logs. Otherwise, find the latest workflow
+run on the given branch; if a single job failed, print its logs, otherwise
+list the ids of the failed jobs.
+"""
+
+import argparse
+import datetime
+import json
+import subprocess
+import sys
+
+
+def run_gh(args):
+    return subprocess.run(
+        ["gh"] + args,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout
+
+
+def run_git(args):
+    return subprocess.run(
+        ["git"] + args,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+
+
+def job_logs(job_id):
+    logs = run_gh(["run", "view", "--job", str(job_id), "--log"])
+    if logs:
+        return logs
+    repo = run_gh(["repo", "view", "--json", "nameWithOwner", "--jq", ".nameWithOwner"]).strip()
+    return run_gh(["api", f"repos/{repo}/actions/jobs/{job_id}/logs"])
+
+
+def parse_time(value):
+    return datetime.datetime.fromisoformat(value.replace("Z", "+00:00"))
+
+
+def go_duration(seconds):
+    h, rem = divmod(int(seconds), 3600)
+    m, s = divmod(rem, 60)
+    if h:
+        return f"{h}h{m}m{s}s"
+    if m:
+        return f"{m}m{s}s"
+    return f"{s}s"
+
+
+def run_elapsed(run, now):
+    start = parse_time(run.get("startedAt") or run.get("createdAt"))
+    if run["status"] == "completed":
+        end = parse_time(run["updatedAt"])
+    else:
+        end = now
+    seconds = max(0, round((end - start).total_seconds()))
+    return go_duration(seconds)
+
+
+def show_fields(fields):
+    width = max(len(name) for name, _ in fields)
+    for name, value in fields:
+        print(f"{name + ':':<{width + 1}} {value}")
+    print()
+
+
+def show_run(run):
+    now = datetime.datetime.now(datetime.timezone.utc)
+    show_fields([
+        ("title", run["displayTitle"]),
+        ("status", f"{run['status']} {run['conclusion']}"),
+        ("workflow", run["workflowName"]),
+        ("branch", run["headBranch"]),
+        ("id", str(run["databaseId"])),
+        ("elapsed", run_elapsed(run, now)),
+    ])
+
+
+def show_jobs(jobs):
+    rows = [["id", "status", "name"]]
+    rows += [
+        [str(job["databaseId"]), f"{job['status']} {job['conclusion']}", job["name"]]
+        for job in jobs
+    ]
+    widths = [max(len(row[i]) for row in rows) for i in range(len(rows[0]))]
+    for row in rows:
+        print("  ".join(f"{cell:<{widths[i]}}" for i, cell in enumerate(row)))
+    print()
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Show the logs of a failed GitHub Actions job."
+    )
+    parser.add_argument("job_id", nargs="?", help="print the logs of this job id")
+    parser.add_argument("-b", "--branch", help="filter runs by branch (default: current branch)")
+    parser.add_argument("-w", "--workflow", help="filter runs by workflow name or filename")
+    args = parser.parse_args()
+
+    if args.job_id:
+        print(job_logs(args.job_id))
+        return
+
+    branch = args.branch or run_git(["branch", "--show-current"])
+    if not branch:
+        sys.exit("Could not determine the current branch")
+
+    filters = ["--branch", branch]
+    if args.workflow:
+        filters += ["--workflow", args.workflow]
+    list_cmd = ["run", "list", "--limit", "1"] + filters
+
+    runs = json.loads(run_gh(list_cmd + ["--json",
+        "databaseId,status,conclusion,displayTitle,workflowName,headBranch,event,createdAt,startedAt,updatedAt"]))
+    if not runs:
+        sys.exit(f"No workflow runs found on branch {branch}")
+    run = runs[0]
+    run_id = run["databaseId"]
+
+    show_run(run)
+
+    if run["conclusion"] != "failure":
+        sys.exit(f"Run {run_id} did not fail (status={run['status']}, conclusion={run['conclusion']})")
+
+    jobs = json.loads(run_gh(["run", "view", str(run_id), "--json", "jobs"]))["jobs"]
+    show_jobs(jobs)
+    failed = [j for j in jobs if j["conclusion"] == "failure"]
+    if not failed:
+        sys.exit(f"No failed jobs in run {run_id}")
+    if len(failed) == 1:
+        print(job_logs(failed[0]["databaseId"]))
+
+
+if __name__ == "__main__":
+    main()
