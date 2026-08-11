@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+"""Watch the latest running GitHub Actions workflow run for the current
+repository and branch."""
+
+import argparse
+import json
+import subprocess
+import sys
+
+
+def run_gh(args):
+    return subprocess.run(
+        ["gh"] + args,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+
+
+def run_git(args):
+    return subprocess.run(
+        ["git"] + args,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Watch the latest running GitHub Actions run for the current branch."
+    )
+    parser.add_argument("-b", "--branch", help="branch to look for runs on (default: current branch)")
+    parser.add_argument("-w", "--workflow", help="filter runs by workflow name or filename")
+    args = parser.parse_args()
+
+    branch = args.branch or run_git(["branch", "--show-current"])
+    if not branch:
+        sys.exit("Could not determine the current branch")
+
+    filters = ["--branch", branch]
+    if args.workflow:
+        filters += ["--workflow", args.workflow]
+
+    runs = json.loads(run_gh(
+        ["run", "list", "--limit", "50"] + filters
+        + ["--json", "databaseId,status,headBranch"]))
+    running = [r for r in runs if r["status"] != "completed"]
+    if not running:
+        sys.exit(f"No running runs found on branch {branch}")
+
+    run_id = running[0]["databaseId"]
+    print(f"Watching run {run_id}...")
+    subprocess.run(["gh", "run", "watch", str(run_id)], check=True)
+
+
+if __name__ == "__main__":
+    main()

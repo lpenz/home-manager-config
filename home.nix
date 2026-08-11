@@ -105,6 +105,7 @@
     };
     "bin/gh-job-log" = { executable = true; source = ./scripts/gh-job-log; };
     "bin/gh-run-and-watch" = { executable = true; source = ./scripts/gh-run-and-watch; };
+    "bin/gh-run-watch" = { executable = true; source = ./scripts/gh-run-watch; };
     "bin/git-commit-msg-conventional" = { executable = true; source = ./scripts/git-commit-msg-conventional; };
     "bin/id-prefix-only" = { executable = true; source = ./scripts/id-prefix-only; };
     "bin/omnibuild" = { executable = true; source = ./scripts/omnibuild; };
