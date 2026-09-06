@@ -1,4 +1,4 @@
-{ config, pkgs, user, urxvtnotify, execpermfix, fundle, ... }:
+{ config, pkgs, user, urxvtnotify, execpermfix, omnilint, fundle, ... }:
 
 {
   programs.home-manager.enable = true;
@@ -80,6 +80,7 @@
     "bin/clang-tidy".source = "${pkgs.clang-tools}/bin/clang-tidy";
     # mine
     "bin/execpermfix".source = "${execpermfix}/bin/execpermfix";
+    "bin/omnilint".source = "${omnilint.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/omnilint";
     # local scripts
     "bin/cargo-run-console.sh" = {
       executable = true;

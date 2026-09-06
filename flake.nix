@@ -12,9 +12,10 @@
       url = "github:nix-community/nixvim/nixos-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    omnilint.url = "github:lpenz/omnilint";
   };
 
-  outputs = { self, nixpkgs, home-manager, cachix, nixvim, ... }:
+  outputs = { self, nixpkgs, home-manager, cachix, nixvim, omnilint, ... }:
     let
       user = "lpenz";
       urxvtnotify = ./scripts/urxvt-notify;
@@ -29,7 +30,7 @@
         in
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit user urxvtnotify execpermfix fundle; };
+          extraSpecialArgs = { inherit user urxvtnotify execpermfix omnilint fundle; };
           modules = [
             nixvim.homeModules.nixvim
             ./home.nix
