@@ -12,7 +12,10 @@
       url = "github:nix-community/nixvim/nixos-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    omnilint.url = "github:lpenz/omnilint";
+    omnilint = {
+      url = "github:lpenz/omnilint/0.10.1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, cachix, nixvim, omnilint, ... }:

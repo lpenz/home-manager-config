@@ -341,22 +341,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1786384358,
-        "narHash": "sha256-RzPPiWeUtuvymnpuEWsdtzli5w4kjZs49FqEs3/1u+I=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "2fcb964de67fcf60b43471c55d5d99e61a9ccb5a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixvim": {
       "inputs": {
         "flake-parts": "flake-parts_2",
@@ -382,18 +366,21 @@
     },
     "omnilint": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
-        "lastModified": 1788651340,
-        "narHash": "sha256-CbZLinLVIWlcs6NUCgZN6mM0oCo9QaxqQNoCDJ2BC/c=",
+        "lastModified": 1789905051,
+        "narHash": "sha256-mQjvOR4fn9ujj0CvbXObibndaTmmYnslR87GK3hA82s=",
         "owner": "lpenz",
         "repo": "omnilint",
-        "rev": "8fa8781ffa9035f6c2ff98fefdf8ee00989f0a6f",
+        "rev": "dcc1b41f6b1aa3d020c9e4ca6a1cd03fc940b6b6",
         "type": "github"
       },
       "original": {
         "owner": "lpenz",
+        "ref": "0.10.1",
         "repo": "omnilint",
         "type": "github"
       }
