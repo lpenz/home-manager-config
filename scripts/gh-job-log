@@ -13,9 +13,9 @@ import subprocess
 import sys
 
 
-def run_gh(args):
+def run_gh(args, repo):
     return subprocess.run(
-        ["gh"] + args,
+        ["gh", "--repo", repo] + args,
         check=True,
         capture_output=True,
         text=True,
@@ -31,12 +31,45 @@ def run_git(args):
     ).stdout.strip()
 
 
-def job_logs(job_id):
-    logs = run_gh(["run", "view", "--job", str(job_id), "--log"])
+def repo_from_origin():
+    try:
+        url = run_git(["config", "--get", "remote.origin.url"])
+    except subprocess.CalledProcessError:
+        return None
+    if url.endswith(".git"):
+        url = url[:-len(".git")]
+    if "github.com:" in url:
+        return url.rsplit("github.com:", 1)[1]
+    if "github.com/" in url:
+        return url.rsplit("github.com/", 1)[1]
+    return None
+
+
+def current_branch():
+    try:
+        return run_git(["branch", "--show-current"])
+    except subprocess.CalledProcessError:
+        return None
+
+
+def job_logs(job_id, repo):
+    api = subprocess.run(
+        ["gh", "api", f"repos/{repo}/actions/jobs/{job_id}", "--jq",
+         "{databaseId: .id, status, conclusion, name}"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    print(job_row(json.loads(api.stdout)))
+    logs = run_gh(["run", "view", "--job", str(job_id), "--log"], repo)
     if logs:
         return logs
-    repo = run_gh(["repo", "view", "--json", "nameWithOwner", "--jq", ".nameWithOwner"]).strip()
-    return run_gh(["api", f"repos/{repo}/actions/jobs/{job_id}/logs"])
+    return subprocess.run(
+        ["gh", "api", f"repos/{repo}/actions/jobs/{job_id}/logs"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout
 
 
 def parse_time(value):
@@ -70,13 +103,14 @@ def show_fields(fields):
     print()
 
 
-def show_run(run):
+def show_run(run, repo, branch):
     now = datetime.datetime.now(datetime.timezone.utc)
     show_fields([
+        ("repo", repo),
         ("title", run["displayTitle"]),
         ("status", f"{run['status']} {run['conclusion']}"),
         ("workflow", run["workflowName"]),
-        ("branch", run["headBranch"]),
+        ("branch", branch),
         ("id", str(run["databaseId"])),
         ("elapsed", run_elapsed(run, now)),
     ])
@@ -94,6 +128,13 @@ def show_jobs(jobs):
     print()
 
 
+def job_row(job):
+    header = ["id", "status", "name"]
+    row = [str(job["databaseId"]), f"{job['status']} {job['conclusion']}", job["name"]]
+    widths = [max(len(header[i]), len(row[i])) for i in range(len(header))]
+    return "  ".join(f"{cell:<{widths[i]}}" for i, cell in enumerate(row))
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Show the logs of a failed GitHub Actions job."
@@ -101,15 +142,20 @@ def main():
     parser.add_argument("job_id", nargs="?", help="print the logs of this job id")
     parser.add_argument("-b", "--branch", help="filter runs by branch (default: current branch)")
     parser.add_argument("-w", "--workflow", help="filter runs by workflow name or filename")
+    parser.add_argument("-R", "--repo", help="use this repository instead of the origin remote")
     args = parser.parse_args()
 
-    if args.job_id:
-        print(job_logs(args.job_id))
-        return
+    repo = args.repo or repo_from_origin()
+    if not repo:
+        sys.exit("Could not determine the repository: pass --repo or set an origin remote")
 
-    branch = args.branch or run_git(["branch", "--show-current"])
+    branch = args.branch or current_branch()
     if not branch:
-        sys.exit("Could not determine the current branch")
+        sys.exit("Could not determine the current branch: pass --branch or use a checked-out branch")
+
+    if args.job_id:
+        print(job_logs(args.job_id, repo))
+        return
 
     filters = ["--branch", branch]
     if args.workflow:
@@ -117,24 +163,24 @@ def main():
     list_cmd = ["run", "list", "--limit", "1"] + filters
 
     runs = json.loads(run_gh(list_cmd + ["--json",
-        "databaseId,status,conclusion,displayTitle,workflowName,headBranch,event,createdAt,startedAt,updatedAt"]))
+        "databaseId,status,conclusion,displayTitle,workflowName,event,createdAt,startedAt,updatedAt"], repo))
     if not runs:
         sys.exit(f"No workflow runs found on branch {branch}")
     run = runs[0]
     run_id = run["databaseId"]
 
-    show_run(run)
+    show_run(run, repo, branch)
 
     if run["conclusion"] != "failure":
         sys.exit(f"Run {run_id} did not fail (status={run['status']}, conclusion={run['conclusion']})")
 
-    jobs = json.loads(run_gh(["run", "view", str(run_id), "--json", "jobs"]))["jobs"]
+    jobs = json.loads(run_gh(["run", "view", str(run_id), "--json", "jobs"], repo))["jobs"]
     show_jobs(jobs)
     failed = [j for j in jobs if j["conclusion"] == "failure"]
     if not failed:
         sys.exit(f"No failed jobs in run {run_id}")
     if len(failed) == 1:
-        print(job_logs(failed[0]["databaseId"]))
+        print(job_logs(failed[0]["databaseId"], repo))
 
 
 if __name__ == "__main__":
