@@ -68,40 +68,42 @@
         vim.opt.grepprg = 'rg --vimgrep -g "!/tags"'
     end
   '';
-  plugins.airline = {
-    enable = true;
-    settings = {
-      symbols_ascii = 1;
+  plugins = {
+    airline = {
+      enable = true;
+      settings = {
+        symbols_ascii = 1;
+      };
     };
-  };
-  plugins.web-devicons = {
-    enable = true;
-  };
-  # plugins.treesitter = {
-  #   enable = true;
-  # };
-  plugins.telescope = {
-    enable = true;
-    keymaps = {
-      "<leader>b" = {
-        action = "buffers";
-        options.desc = "Navigate buffers with telescope";
-      };
-      "<leader>f" = {
-        action = "find_files";
-        options.desc = "Find files with telescope";
-      };
-      "<leader>/" = {
-        action = "current_buffer_fuzzy_find";
-        options.desc = "Fuzzy find in current buffer with telescope";
-      };
-      "<leader>es" = {
-        action = "live_grep";
-        options.desc = "Live grep/rg with telescope";
-      };
-      "<leader>q" = {
-        action = "quickfix";
-        options.desc = "Quickfix entries with telescope";
+    web-devicons = {
+      enable = true;
+    };
+    # treesitter = {
+    #   enable = true;
+    # };
+    telescope = {
+      enable = true;
+      keymaps = {
+        "<leader>b" = {
+          action = "buffers";
+          options.desc = "Navigate buffers with telescope";
+        };
+        "<leader>f" = {
+          action = "find_files";
+          options.desc = "Find files with telescope";
+        };
+        "<leader>/" = {
+          action = "current_buffer_fuzzy_find";
+          options.desc = "Fuzzy find in current buffer with telescope";
+        };
+        "<leader>es" = {
+          action = "live_grep";
+          options.desc = "Live grep/rg with telescope";
+        };
+        "<leader>q" = {
+          action = "quickfix";
+          options.desc = "Quickfix entries with telescope";
+        };
       };
     };
   };

@@ -34,10 +34,15 @@ jobs:
       - run: nix flake check
       - name: Install home-manager
         run: |
-          set -e -x; \
-          nix-channel --add "https://github.com/nix-community/home-manager/archive/release-26.05.tar.gz" home-manager; \
-          nix-channel --update -v; \
-          export NIX_PATH=${NIX_PATH:+$NIX_PATH:}$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels; \
+          set -e -x
+          nix-channel --add \
+            "https://github.com/nix-community/home-manager/"\
+            "archive/release-26.05.tar.gz" \
+            home-manager
+          nix-channel --update -v
+          export NIX_PATH=${NIX_PATH:+$NIX_PATH:}$HOME/.nix-defexpr/channels
+          NIX_PATH="$NIX_PATH:/nix/var/nix/profiles/per-user/root/channels"
+          export NIX_PATH
           nix-shell '<home-manager>' -A install
       - name: Set up repository as home-manager
         run: |
@@ -49,9 +54,11 @@ jobs:
           rm -rf home-manager nixpkgs; \
           ln -s "$dir" home-manager; \
       - name: home-manager initial run that breaks the database
-        run: home-manager switch --flake .#${{ matrix.config }} -b backup || true
+        run: >-
+          home-manager switch --flake .#${{ matrix.config }} -b backup ||
+          true
       - name: Remove database after pragma change
-        run: rm -rf $HOME/.cache
+        run: rm -rf "$HOME/.cache"
       - name: home-manager full run
         run: home-manager switch --flake .#${{ matrix.config }} -b backup
       - name: Set up repository as home-manager

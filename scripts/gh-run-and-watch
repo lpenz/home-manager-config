@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# pylint: disable=invalid-name
 """Trigger a GitHub Actions CI workflow and watch its progress."""
 
 import argparse

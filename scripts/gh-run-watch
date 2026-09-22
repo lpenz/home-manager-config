@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# pylint: disable=invalid-name
 """Watch the latest running GitHub Actions workflow run for the current
 repository and branch."""
 
@@ -9,6 +10,7 @@ import sys
 
 
 def run_gh(args):
+    """Run gh with the given args and return its trimmed stdout."""
     return subprocess.run(
         ["gh"] + args,
         check=True,
@@ -18,6 +20,7 @@ def run_gh(args):
 
 
 def run_git(args):
+    """Run git with the given args and return its trimmed stdout."""
     return subprocess.run(
         ["git"] + args,
         check=True,
@@ -27,11 +30,23 @@ def run_git(args):
 
 
 def main():
+    """Watch the latest running workflow run for the current branch."""
     parser = argparse.ArgumentParser(
-        description="Watch the latest running GitHub Actions run for the current branch."
+        description=(
+            "Watch the latest running GitHub Actions run for the "
+            "current branch."
+        )
     )
-    parser.add_argument("-b", "--branch", help="branch to look for runs on (default: current branch)")
-    parser.add_argument("-w", "--workflow", help="filter runs by workflow name or filename")
+    parser.add_argument(
+        "-b",
+        "--branch",
+        help="branch to look for runs on (default: current branch)",
+    )
+    parser.add_argument(
+        "-w",
+        "--workflow",
+        help="filter runs by workflow name or filename",
+    )
     args = parser.parse_args()
 
     branch = args.branch or run_git(["branch", "--show-current"])
