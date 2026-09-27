@@ -13,7 +13,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     omnilint = {
-      url = "github:lpenz/omnilint/0.10.1";
+      url = "github:lpenz/omnilint/0.10.3";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

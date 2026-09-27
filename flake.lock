@@ -371,16 +371,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1789905051,
-        "narHash": "sha256-mQjvOR4fn9ujj0CvbXObibndaTmmYnslR87GK3hA82s=",
+        "lastModified": 1790519071,
+        "narHash": "sha256-RoZv4H98IYIKhAAlztuqmx8VNVa4hth5C8NGFTH5k9Y=",
         "owner": "lpenz",
         "repo": "omnilint",
-        "rev": "dcc1b41f6b1aa3d020c9e4ca6a1cd03fc940b6b6",
+        "rev": "11c37bb21d8fbf1a7764896f538e35dab2174943",
         "type": "github"
       },
       "original": {
         "owner": "lpenz",
-        "ref": "0.10.1",
+        "ref": "0.10.3",
         "repo": "omnilint",
         "type": "github"
       }
